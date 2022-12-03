@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/forgetpass"
+    tools:context=".forgetPass">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="112dp"
+            android:layout_height="79dp"
+            android:layout_marginTop="520dp"
+            android:layout_marginLeft="6dp"
+            android:fontFamily="@font/caveat_brush"
+            android:text="@string/forget_password"
+            android:textColor="#4A1A53"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/text"
+            android:layout_width="281dp"
+            android:layout_height="78dp"
+            android:layout_marginTop="515dp"
+            android:layout_marginRight="3dp"
+            android:fontFamily="@font/caveat_brush"
+            android:text="don't worry it happens please enter your email"
+            android:textColor="#2C0932"
+            android:textSize="16sp" />
+
+
+    </LinearLayout>
+    <LinearLayout
+            android:layout_width="417dp"
+            android:layout_height="match_parent"
+            android:backgroundTint="#E2D2E4"
+            android:orientation="horizontal"
+            tools:ignore="MissingConstraints">
+
+        <EditText
+            android:id="@+id/editTextemail"
+            android:layout_width="555dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="610dp"
+            android:layout_marginRight="30dp"
+            android:layout_weight="1"
+            android:ems="10"
+            android:inputType="phone" />
+
+         </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Sumbit"
+            android:id="@+id/submit_btn"
+            android:backgroundTint="#512759"
+            android:layout_marginTop="698dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"/>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

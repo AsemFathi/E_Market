@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/main_app"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <Button
+            android:id="@+id/Login"
+            android:layout_width="289dp"
+            android:layout_height="58dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="88mm"
+            android:backgroundTint="#7B1FA2"
+            android:fontFamily="@font/carter_one"
+            android:text="Login"
+            android:textAllCaps="false"
+            android:textSize="18dp" />
+        <Button
+            android:id="@+id/Signup"
+            android:layout_width="285dp"
+            android:layout_height="58dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="#7B1FA2"
+            android:fontFamily="@font/carter_one"
+            android:text="Sign up"
+            android:textAllCaps="false"
+            android:textSize="18dp" />
+    </LinearLayout>
+</RelativeLayout>
+

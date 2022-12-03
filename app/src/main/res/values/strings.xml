@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">E_Market</string>
+    <string name="title_activity_login">Login</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="forget_password">Forget Password?</string>
+    <string name="don_t_worry_it_happens_please_enter_the_number_associated_with_your_account">Don\'t worry! it happens.please enter the number associated with your account.</string>
+    <string name="Register">Register</string>
+</resources>
