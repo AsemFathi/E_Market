@@ -16,7 +16,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="60mm"
+            android:layout_marginTop="5mm"
             android:fontFamily="@font/wendy_one"
             android:gravity="left"
             android:text="Register"
@@ -31,7 +31,7 @@
             android:layout_marginTop="2dp"
             android:hint="Username"
             android:paddingLeft="10dp"
-            android:inputType="textPassword" />
+             />
         <EditText
             android:id="@+id/editTextRegisterEmailAddress"
             android:layout_width="match_parent"
@@ -47,7 +47,8 @@
             android:ems="10"
             android:layout_marginTop="2dp"
             android:hint="Password"
-            android:paddingLeft="10dp" />
+            android:paddingLeft="10dp"
+            android:inputType="textPassword"/>
 
         <EditText
             android:id="@+id/editTextRegisterPhone"
@@ -57,6 +58,20 @@
             android:layout_marginTop="2dp"
             android:hint="Phone"
             android:paddingLeft="10dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Birthday"
+            android:textSize="24dp"
+            android:textStyle="bold" />
+        <CalendarView
+            android:id="@+id/calendar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:dateTextAppearance="@style/CalenderViewDateCustomText"
+            android:theme="@style/CalenderViewCustom"
+            android:weekDayTextAppearance="@style/CalenderViewWeekCustomText" />
 
 
 
