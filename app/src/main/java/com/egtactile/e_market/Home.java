@@ -2,11 +2,6 @@ package com.egtactile.e_market;
 
 import static android.content.ContentValues.TAG;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,6 +9,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.egtactile.e_market.databinding.ActivityHomeBinding;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -29,23 +36,31 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+public class Home extends AppCompatActivity {
 
-public class Home_activity extends AppCompatActivity {
+    private ActivityHomeBinding binding;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
-    TextView Name;
-    TextView Email;
-    TextView Phone;
-    TextView Day;
-    TextView Month;
-    TextView Year;
+
     FirebaseUser user;
     StorageReference storageReference;
     String urldisplay;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_homeeeeeeee);
+        //setContentView(R.layout.activity_home);
+        binding = ActivityHomeBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
+        BottomNavigationView navView = findViewById(R.id.nav_view);
+        // Passing each menu ID as a set of Ids because each
+        // menu should be considered as top level destinations.
+        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
+                R.id.navigation_home, R.id.navigation_basket, R.id.navigation_profile, R.id.navigation_categories)
+                .build();
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_home);
+        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+        NavigationUI.setupWithNavController(binding.navView, navController);
 
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
         List<items> itemsList = new ArrayList<items>();
@@ -53,7 +68,7 @@ public class Home_activity extends AppCompatActivity {
         user = FirebaseAuth.getInstance().getCurrentUser();
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference().child("Products");
-        storageReference =FirebaseStorage.getInstance().getReference();
+        storageReference = FirebaseStorage.getInstance().getReference();
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -125,17 +140,16 @@ public class Home_activity extends AppCompatActivity {
 
 
 
-                recyclerView.setLayoutManager(new LinearLayoutManager(Home_activity.this));
+                recyclerView.setLayoutManager(new LinearLayoutManager(Home.this));
                 recyclerView.setAdapter(new MyAdapter(getApplicationContext() , itemsList));
 
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(Home_activity.this, "Failll", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Home.this, "Failll", Toast.LENGTH_SHORT).show();
             }
         });
     }
-
 
 }

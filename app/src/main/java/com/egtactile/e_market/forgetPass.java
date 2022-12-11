@@ -3,6 +3,7 @@ package com.egtactile.e_market;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -33,6 +34,10 @@ public class forgetPass extends AppCompatActivity {
                     public void onComplete(@NonNull Task<Void> task) {
                         if(task.isSuccessful()){
                             Toast.makeText(forgetPass.this,"Email sent" ,Toast.LENGTH_LONG).show();
+
+                            Intent intent = new Intent(forgetPass.this , Login.class);
+                            startActivity(intent);
+
                         }
                         else
                             Toast.makeText(forgetPass.this, "Error", Toast.LENGTH_SHORT).show();
