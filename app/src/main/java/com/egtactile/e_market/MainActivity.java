@@ -45,36 +45,5 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
-      /*  String email = Paper.book().read("UserEmail");
-        String password = Paper.book().read("UserPassword");
 
-        if (email != "" && password !="")
-        {
-            if (!TextUtils.isEmpty(email) && !TextUtils.isEmpty(password))
-            {
-                login(email , password);
-            }
-        }
-    }
-    private void login (String email, String password)
-    {
-        FirebaseAuth auth = FirebaseAuth.getInstance();
-        auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()) {
-                    Toast.makeText(MainActivity.this, "Login Done", Toast.LENGTH_SHORT).show();
-                    if (email.equals("asem12@gmail.com")) {
-                        Intent intent = new Intent(MainActivity.this, Admin_Page.class);
-                        startActivity(intent);
-                    } else {
-                        Intent intent = new Intent(MainActivity.this, Home.class);
-                        startActivity(intent);
-                    }
-                } else
-                    Toast.makeText(MainActivity.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
-
-            }
-        });
-    }*/
 }

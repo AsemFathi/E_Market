@@ -13,27 +13,22 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public class MyAdapter extends RecyclerView.Adapter<MyNewHolder> {
+public class MyAdapter extends RecyclerView.Adapter<MyNewHolder> implements RecyclerViewInterface{
     Context context;
     List<items> itemsList;
-   /* public interface OnClickListener{
-        void onClick(int Position);
-    }
-    private OnClickListener mListener;
-    public void OnItemClick(OnClickListener onClickListener){
 
-        mListener = onClickListener;
-    }
-*/
-    public MyAdapter(Context context, List<items> itemsList) {
+    private final RecyclerViewInterface recyclerViewInterface;
+    public MyAdapter(Context context, List<items> itemsList,
+                     RecyclerViewInterface recyclerViewInterface) {
         this.context = context;
         this.itemsList = itemsList;
+        this.recyclerViewInterface = recyclerViewInterface;
     }
 
     @NonNull
     @Override
     public MyNewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new MyNewHolder(LayoutInflater.from(context).inflate(R.layout.item_view , parent ,false));
+        return new MyNewHolder(LayoutInflater.from(context).inflate(R.layout.item_view , parent ,false) , recyclerViewInterface);
     }
 
     @Override
@@ -41,42 +36,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyNewHolder> {
         holder.Name.setText(itemsList.get(position).getName());
         holder.Price.setText(itemsList.get(position).getPrice());
 
-
-
-        /*
-        * holder.imageViewAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(mListener!= null)
-                {
-                    int position = holder.getAdapterPosition();
-                    if (position != RecyclerView.NO_POSITION)
-                        mListener.onClick(position);
-
-                }
-                coffeeModels.get(position).quantity++;
-
-                notifyItemChanged(position);
-            }
-        });
-        holder.imageViewRemove.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(mListener!= null)
-                {
-                    int position = holder.getAdapterPosition();
-                    if (position != RecyclerView.NO_POSITION)
-                        mListener.onClick(position);
-
-                }
-                coffeeModels.get(position).quantity--;
-                if (coffeeModels.get(position).getQuantity()<0)
-                {
-                    coffeeModels.get(position).quantity=0;
-                }
-                notifyDataSetChanged();
-            }
-        });*/
         Picasso.get()
                 .load(itemsList.get(position).getImage())
                 .into(holder.imageView);
@@ -85,5 +44,10 @@ public class MyAdapter extends RecyclerView.Adapter<MyNewHolder> {
     @Override
     public int getItemCount() {
         return itemsList.size();
+    }
+
+    @Override
+    public void onItemClick(int pos) {
+
     }
 }

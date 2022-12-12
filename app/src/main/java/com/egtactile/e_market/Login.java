@@ -27,7 +27,6 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import io.paperdb.Paper;
 
-
 public class Login extends AppCompatActivity {
     EditText Email;
     EditText Password;
@@ -35,7 +34,6 @@ public class Login extends AppCompatActivity {
     Button SignUp;
     Button Forget;
     FirebaseAuth auth;
-
     CheckBox checkBox;
 
     @Override
@@ -60,7 +58,6 @@ public class Login extends AppCompatActivity {
         {
             if (!TextUtils.isEmpty(eemail) && !TextUtils.isEmpty(Ppassword))
             {
-                //login(eemail , Ppassword);
                 Email.setText(eemail);
                 Password.setText(Ppassword);
                 checkBox.setChecked(true);

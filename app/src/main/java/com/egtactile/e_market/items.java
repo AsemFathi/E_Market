@@ -2,7 +2,8 @@ package com.egtactile.e_market;
 
 public class items {
     String price;
-    String name, description;
+    String Category;
+    String name, description , Num;
     public int quantity=0;
 
     public int getQuantity() {
@@ -15,11 +16,29 @@ public class items {
 
     String image;
 
-    public items(String price, String name, String description, String image) {
+    public items(String price, String name, String description, String image , String category , String Num) {
         this.price = price;
         this.name = name;
+        this.Num = Num;
         this.description = description;
         this.image = image;
+        this.Category = category;
+    }
+
+    public String getNum() {
+        return Num;
+    }
+
+    public void setNum(String num) {
+        Num = num;
+    }
+
+    public String getCategory() {
+        return Category;
+    }
+
+    public void setCategory(String category) {
+        Category = category;
     }
 
     public String getPrice() {

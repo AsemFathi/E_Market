@@ -47,9 +47,10 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-public class Home extends AppCompatActivity {
+public class Home extends AppCompatActivity implements RecyclerViewInterface {
 
     private ActivityHomeBinding binding;
+
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
     RecyclerView recyclerView;
@@ -61,6 +62,7 @@ public class Home extends AppCompatActivity {
     String searchInput;
     Map<String , List<String>> data = new HashMap<>();
     List<String> info = new ArrayList<>();
+    List<items> itemsList = new ArrayList<items>();
 
 
 
@@ -82,7 +84,7 @@ public class Home extends AppCompatActivity {
             NavigationUI.setupWithNavController(binding.navView, navController);
 
             recyclerView = findViewById(R.id.recyclerView);
-            List<items> itemsList = new ArrayList<items>();
+
             searchText = findViewById(R.id.searchdata);
             searchView_btn = findViewById(R.id.search_btn);
             recyclerView.setLayoutManager(new LinearLayoutManager(Home.this));
@@ -126,9 +128,9 @@ public class Home extends AppCompatActivity {
                     for(DataSnapshot datax: snapshot.getChildren())
                     {
 
-                        String productType = datax.getKey();
-                        Log.i(TAG, "onDataChange: First " + productType);
                         String ProductName = datax.getKey();
+                        String ProductType = datax.child("Category").getValue().toString();
+                        //String ProductName = datax.getKey();
                         String ProPrice = datax.child("Price").getValue().toString();
                         String ProNum = datax.child("Num").getValue().toString();
                         String ProImageUrl = datax.child("Picture").getValue().toString();
@@ -146,12 +148,12 @@ public class Home extends AppCompatActivity {
                         info.add(ProImageUrl.toLowerCase());
 
                         data.put(ProductName.toLowerCase(), info);
-                        itemsList.add(new items(ProPrice, ProductName, des, ProImageUrl));
+                        itemsList.add(new items(ProPrice, ProductName, des, ProImageUrl , ProductType , ProNum));
                         Log.i(TAG, "onDataChange: URL" + urldisplay);
 
 
                     }
-                   recyclerView.setAdapter(new MyAdapter(getApplicationContext() ,itemsList));
+                   recyclerView.setAdapter(new MyAdapter(getApplicationContext() ,itemsList , Home.this ));
                 }
 
                 @Override
@@ -199,11 +201,12 @@ public class Home extends AppCompatActivity {
                                     searchList.add(ProImageUrl);
                                     searchList.add(ProductType);
                                     searchData.put(ProductName , searchList);
-                                    searchItemsList.add(new items(ProPrice , ProductName , des , ProImageUrl));
+                                    searchItemsList.add(new items(ProPrice , ProductName , des , ProImageUrl , ProductType , ProNum));
                                     Log.i(TAG, "onDataChange: URL" + urldisplay);
                                 }
                             }
-                            recyclerView.setAdapter(new MyAdapter(getApplicationContext() , searchItemsList));
+                            itemsList = searchItemsList;
+                            recyclerView.setAdapter(new MyAdapter(getApplicationContext() , searchItemsList ,Home.this));
 
                         }
 
@@ -235,6 +238,21 @@ public class Home extends AppCompatActivity {
             });
 
     }
+
+    @Override
+    public void onItemClick(int pos) {
+        Intent intent = new Intent(Home.this , ProductDetails.class);
+        intent.putExtra("Name" , itemsList.get(pos).getName());
+        intent.putExtra("Type" , itemsList.get(pos).getCategory());
+        intent.putExtra("Price" , itemsList.get(pos).getPrice());
+        intent.putExtra("Num" , itemsList.get(pos).getNum());
+        intent.putExtra("Description" , itemsList.get(pos).getDescription());
+        intent.putExtra("image" , itemsList.get(pos).getImage());
+        startActivity(intent);
+
+    }
+
+
 /*
     @Override
     protected void onStart() {
