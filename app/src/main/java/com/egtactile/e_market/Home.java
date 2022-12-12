@@ -50,7 +50,6 @@ import java.util.Map;
 public class Home extends AppCompatActivity implements RecyclerViewInterface {
 
     private ActivityHomeBinding binding;
-
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
     RecyclerView recyclerView;
@@ -63,179 +62,177 @@ public class Home extends AppCompatActivity implements RecyclerViewInterface {
     Map<String , List<String>> data = new HashMap<>();
     List<String> info = new ArrayList<>();
     List<items> itemsList = new ArrayList<items>();
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            //setContentView(R.layout.activity_home);
-            binding = ActivityHomeBinding.inflate(getLayoutInflater());
-            setContentView(binding.getRoot());
+        super.onCreate(savedInstanceState);
+        //setContentView(R.layout.activity_home);
+        binding = ActivityHomeBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-            BottomNavigationView navView = findViewById(R.id.nav_view);
-            // Passing each menu ID as a set of Ids because each
-            // menu should be considered as top level destinations.
-            AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                    R.id.navigation_home, R.id.navigation_basket, R.id.navigation_profile, R.id.navigation_categories)
-                    .build();
-            NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_home);
-            NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-            NavigationUI.setupWithNavController(binding.navView, navController);
+        BottomNavigationView navView = findViewById(R.id.nav_view);
+        // Passing each menu ID as a set of Ids because each
+        // menu should be considered as top level destinations.
+        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
+                R.id.navigation_home, R.id.navigation_basket, R.id.navigation_profile, R.id.navigation_categories)
+                .build();
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_home);
+        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+        NavigationUI.setupWithNavController(binding.navView, navController);
 
-            recyclerView = findViewById(R.id.recyclerView);
+        recyclerView = findViewById(R.id.recyclerView);
 
-            searchText = findViewById(R.id.searchdata);
-            searchView_btn = findViewById(R.id.search_btn);
-            recyclerView.setLayoutManager(new LinearLayoutManager(Home.this));
+        searchText = findViewById(R.id.searchdata);
+        searchView_btn = findViewById(R.id.search_btn);
+        recyclerView.setLayoutManager(new LinearLayoutManager(Home.this));
 
-            user = FirebaseAuth.getInstance().getCurrentUser();
-            firebaseDatabase = FirebaseDatabase.getInstance();
-            databaseReference = firebaseDatabase.getReference().child("Products");
-            storageReference = FirebaseStorage.getInstance().getReference();
-            databaseReference.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                   /* Map<String , Object> map = (Map) snapshot.getValue();  // get type
-                    for (Map.Entry<String,Object > pair : map.entrySet()) {
-                        //System.out.println(String.format("Key (name) is: %s, Value (age) is : %s", pair.getKey(), pair.getValue()));
-                        //itemsList.add(new items("10" , pair.getKey(), R.drawable.main_app));
-                        Map<String , Object> map1 = (Map) snapshot.child(pair.getKey()).getValue(); // get name
-                        Log.i(TAG,"Type "+ pair.getKey() + "  " +pair.getValue());
-                        for (Map.Entry<String , Object> pair1 : map1.entrySet())
-                        {
-                            Log.i(TAG,"Name "+ pair1.getKey() + "  " +pair1.getValue());
-                            Map<String , Object> map2 = (Map) snapshot.child(pair.getKey()).child(pair1.getKey()).getValue();
-                            int i =0;
-                            for (Map.Entry<String , Object> pair2 : map2.entrySet())
-                            {
-                               // Map<String , Object> map2 = (Map)snapshot.child(pair.getKey()).child(pair1.getKey()).child(pair2.getKey()).getValue();
-
-                                Log.i(TAG,"Price "+ pair2.getKey() + "  " +pair2.getValue());
-                                if (i == 0)
-                                    itemsList.add(new items(pair2.getValue().toString() , pair1.getKey(), R.drawable.main_app));
-                                //
-                                i++;
-
-                            }
-
-                        }
-
-                    }
-
-                    */
-
-                    for(DataSnapshot datax: snapshot.getChildren())
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference().child("Products");
+        storageReference = FirebaseStorage.getInstance().getReference();
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+               /* Map<String , Object> map = (Map) snapshot.getValue();  // get type
+                for (Map.Entry<String,Object > pair : map.entrySet()) {
+                    //System.out.println(String.format("Key (name) is: %s, Value (age) is : %s", pair.getKey(), pair.getValue()));
+                    //itemsList.add(new items("10" , pair.getKey(), R.drawable.main_app));
+                    Map<String , Object> map1 = (Map) snapshot.child(pair.getKey()).getValue(); // get name
+                    Log.i(TAG,"Type "+ pair.getKey() + "  " +pair.getValue());
+                    for (Map.Entry<String , Object> pair1 : map1.entrySet())
                     {
+                        Log.i(TAG,"Name "+ pair1.getKey() + "  " +pair1.getValue());
+                        Map<String , Object> map2 = (Map) snapshot.child(pair.getKey()).child(pair1.getKey()).getValue();
+                        int i =0;
+                        for (Map.Entry<String , Object> pair2 : map2.entrySet())
+                        {
+                           // Map<String , Object> map2 = (Map)snapshot.child(pair.getKey()).child(pair1.getKey()).child(pair2.getKey()).getValue();
 
-                        String ProductName = datax.getKey();
-                        String ProductType = datax.child("Category").getValue().toString();
-                        //String ProductName = datax.getKey();
-                        String ProPrice = datax.child("Price").getValue().toString();
-                        String ProNum = datax.child("Num").getValue().toString();
-                        String ProImageUrl = datax.child("Picture").getValue().toString();
-                        String des = datax.child("Description").getValue().toString();
-                        Log.i(TAG, "onDataChange: Description" + des );
-                        storageReference.child(ProImageUrl).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                            @Override
-                            public void onSuccess(Uri uri) {
-                                urldisplay = uri.toString();
-                            }
-                        });
-                        info.add(ProPrice.toLowerCase());
-                        info.add(ProNum.toLowerCase());
-                        info.add(des.toLowerCase());
-                        info.add(ProImageUrl.toLowerCase());
-
-                        data.put(ProductName.toLowerCase(), info);
-                        itemsList.add(new items(ProPrice, ProductName, des, ProImageUrl , ProductType , ProNum));
-                        Log.i(TAG, "onDataChange: URL" + urldisplay);
-
-
-                    }
-                   recyclerView.setAdapter(new MyAdapter(getApplicationContext() ,itemsList , Home.this ));
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-                    Toast.makeText(Home.this, "Failll", Toast.LENGTH_SHORT).show();
-                }
-
-            });
-            searchView_btn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    searchInput = searchText.getText().toString();
-                    Map<String , List<String>> searchData = new HashMap<>();
-                    List<String> searchList = new ArrayList<>();
-
-                    List<items> searchItemsList = new ArrayList<items>();
-                    DatabaseReference databaseReference1 = FirebaseDatabase
-                            .getInstance().getReference().child("Products");
-                    databaseReference1.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            for(DataSnapshot datax: snapshot.getChildren())
-                            {
-
-                                String ProductName = datax.getKey();
-                                String ProductType = datax.child("Category").getValue().toString();
-                                if (ProductName.toLowerCase().contains(searchInput.toLowerCase()) ||
-                                    ProductType.toLowerCase().contains(searchInput.toLowerCase()) ) {
-                                    String ProPrice = datax.child("Price").getValue().toString();
-                                    String ProNum = datax.child("Num").getValue().toString();
-                                    String ProImageUrl = datax.child("Picture").getValue().toString();
-                                    String des = datax.child("Description").getValue().toString();
-
-
-                                    Log.i(TAG, "onDataChange: Description" + des);
-                                    storageReference.child(ProImageUrl).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                                        @Override
-                                        public void onSuccess(Uri uri) {
-                                            urldisplay = uri.toString();
-                                        }
-                                    });
-                                    searchList.add(ProPrice);
-                                    searchList.add(ProNum);
-                                    searchList.add(des);
-                                    searchList.add(ProImageUrl);
-                                    searchList.add(ProductType);
-                                    searchData.put(ProductName , searchList);
-                                    searchItemsList.add(new items(ProPrice , ProductName , des , ProImageUrl , ProductType , ProNum));
-                                    Log.i(TAG, "onDataChange: URL" + urldisplay);
-                                }
-                            }
-                            itemsList = searchItemsList;
-                            recyclerView.setAdapter(new MyAdapter(getApplicationContext() , searchItemsList ,Home.this));
+                            Log.i(TAG,"Price "+ pair2.getKey() + "  " +pair2.getValue());
+                            if (i == 0)
+                                itemsList.add(new items(pair2.getValue().toString() , pair1.getKey(), R.drawable.main_app));
+                            //
+                            i++;
 
                         }
 
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
+                    }
 
+                }
+
+                */
+
+                for(DataSnapshot datax: snapshot.getChildren())
+                {
+
+                    String ProductName = datax.getKey();
+                    String ProductType = datax.child("Category").getValue().toString();
+                    //String ProductName = datax.getKey();
+                    String ProPrice = datax.child("Price").getValue().toString();
+                    String ProNum = datax.child("Num").getValue().toString();
+                    String ProImageUrl = datax.child("Picture").getValue().toString();
+                    String des = datax.child("Description").getValue().toString();
+                    Log.i(TAG, "onDataChange: Description" + des );
+                    storageReference.child(ProImageUrl).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+                            urldisplay = uri.toString();
                         }
                     });
-                   // Log.i(TAG, "onClick 1: Done");
-                    //onStart();
-                    /*//Map<String , List<String>> searchData = new HashMap<>();
-                    String searchtext = searchText.getText().toString();
-                    itemsList.clear();
-                    List<String> information = new ArrayList<>();
-                    //Search by product Name
-                    if(data.containsKey(searchtext.toLowerCase()))
-                    {
-                        // index 0 Price , index 1 Num , index 2 Image
-                        information = data.get(searchtext.toLowerCase());
-                        itemsList.add(new items(information.get(0) , searchtext
-                                , information.get(2)) );
+                    info.add(ProPrice.toLowerCase());
+                    info.add(ProNum.toLowerCase());
+                    info.add(des.toLowerCase());
+                    info.add(ProImageUrl.toLowerCase());
 
+                    data.put(ProductName.toLowerCase(), info);
+                    itemsList.add(new items(ProPrice, ProductName, des, ProImageUrl , ProductType , ProNum));
+                    Log.i(TAG, "onDataChange: URL" + urldisplay);
+
+
+                }
+                recyclerView.setAdapter(new MyAdapter(getApplicationContext() ,itemsList , Home.this ));
+                Navigation.findNavController(navView).navigate(R.id.navigation_home);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(Home.this, "Failll", Toast.LENGTH_SHORT).show();
+            }
+
+        });
+        searchView_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                searchInput = searchText.getText().toString();
+                Map<String , List<String>> searchData = new HashMap<>();
+                List<String> searchList = new ArrayList<>();
+
+                List<items> searchItemsList = new ArrayList<items>();
+                DatabaseReference databaseReference1 = FirebaseDatabase
+                        .getInstance().getReference().child("Products");
+                databaseReference1.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        for(DataSnapshot datax: snapshot.getChildren())
+                        {
+
+                            String ProductName = datax.getKey();
+                            String ProductType = datax.child("Category").getValue().toString();
+                            if (ProductName.toLowerCase().contains(searchInput.toLowerCase()) ||
+                                ProductType.toLowerCase().contains(searchInput.toLowerCase()) ) {
+                                String ProPrice = datax.child("Price").getValue().toString();
+                                String ProNum = datax.child("Num").getValue().toString();
+                                String ProImageUrl = datax.child("Picture").getValue().toString();
+                                String des = datax.child("Description").getValue().toString();
+
+
+                                Log.i(TAG, "onDataChange: Description" + des);
+                                storageReference.child(ProImageUrl).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                    @Override
+                                    public void onSuccess(Uri uri) {
+                                        urldisplay = uri.toString();
+                                    }
+                                });
+                                searchList.add(ProPrice);
+                                searchList.add(ProNum);
+                                searchList.add(des);
+                                searchList.add(ProImageUrl);
+                                searchList.add(ProductType);
+                                searchData.put(ProductName , searchList);
+                                searchItemsList.add(new items(ProPrice , ProductName , des , ProImageUrl , ProductType , ProNum));
+                                Log.i(TAG, "onDataChange: URL" + urldisplay);
+                            }
+                        }
+                        itemsList = searchItemsList;
+                        recyclerView.setAdapter(new MyAdapter(getApplicationContext() , searchItemsList ,Home.this));
 
                     }
-                    recyclerView.setLayoutManager(new LinearLayoutManager(Home.this));
-                    recyclerView.setAdapter(new MyAdapter(getApplicationContext() , itemsList));
-*/
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+               /* Log.i(TAG, "onClick 1: Done");
+                //onStart();
+                //Map<String , List<String>> searchData = new HashMap<>();
+                String searchtext = searchText.getText().toString();
+                itemsList.clear();
+                List<String> information = new ArrayList<>();
+                //Search by product Name
+                if(data.containsKey(searchtext.toLowerCase()))
+                {
+                    // index 0 Price , index 1 Num , index 2 Image
+                    information = data.get(searchtext.toLowerCase());
+                    itemsList.add(new items(information.get(0) , searchtext
+                            , information.get(2)) );
+
+
                 }
-            });
+                recyclerView.setLayoutManager(new LinearLayoutManager(Home.this));
+                recyclerView.setAdapter(new MyAdapter(getApplicationContext() , itemsList));
+*/
+            }
+        });
 
     }
 
