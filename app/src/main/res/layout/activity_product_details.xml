@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ProductDetails">
+
+    <ImageView
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="100dp"
+        android:id="@+id/ProductImage"
+        android:layout_width="200dp"
+        android:src="@drawable/ic_menu_gallery"
+        android:layout_height="200dp"
+        />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="Name : "
+            android:textSize="30dp"/>
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:hint="Price"
+            android:textSize="30dp"
+            android:id="@+id/ProductName"
+
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="Price : "
+            android:textSize="30dp"/>
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:hint="Price"
+            android:textSize="30dp"
+            android:id="@+id/ProductPrice"
+
+            />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="Available in stock : "
+            android:textSize="30dp"/>
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:hint="Price"
+            android:textSize="30dp"
+            android:id="@+id/ProductNum"
+
+            />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="Description : "
+            android:textSize="30dp"/>
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:hint="Price"
+            android:textSize="30dp"
+            android:id="@+id/ProductDescription"
+
+            />
+
+    </LinearLayout>
+   <LinearLayout
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_marginTop="30dp"
+       >
+
+       <ImageView
+           android:layout_marginLeft="100dp"
+
+           android:id="@+id/im_re"
+           android:src="@drawable/ic_baseline_remove_24"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:paddingEnd="5dp"/>
+       <TextView
+           android:id="@+id/tv_num"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:textSize="20sp"
+           android:text="1"
+           android:textStyle="bold"
+           />
+       <ImageView
+           android:layout_marginStart="15dp"
+           android:id="@+id/im_ad"
+           android:src="@drawable/ic_baseline_add_24"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:paddingEnd="5dp"/>
+   </LinearLayout>
+
+</LinearLayout>

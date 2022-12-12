@@ -23,9 +23,12 @@
             tools:layout_editor_absoluteX="8dp"
             tools:layout_editor_absoluteY="32dp" />
 
-        <SearchView
+        <Button
             android:layout_width="48dp"
             android:layout_height="41dp"
+            android:id="@+id/search_btn"
+            android:backgroundTint="@color/white"
+            android:drawableBottom="@drawable/search_btn"
             tools:layout_editor_absoluteX="295dp"
             tools:layout_editor_absoluteY="32dp"
             android:layout_marginRight="10dp"/>
