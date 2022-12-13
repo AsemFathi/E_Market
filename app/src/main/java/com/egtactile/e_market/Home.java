@@ -89,6 +89,8 @@ public class Home extends AppCompatActivity implements RecyclerViewInterface {
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference().child("Products");
         storageReference = FirebaseStorage.getInstance().getReference();
+
+        //get data from firebase
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -159,6 +161,8 @@ public class Home extends AppCompatActivity implements RecyclerViewInterface {
             }
 
         });
+
+        //search in data from firebase
         searchView_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -234,8 +238,11 @@ public class Home extends AppCompatActivity implements RecyclerViewInterface {
             }
         });
 
+
+
     }
 
+    // open the item details when click on it
     @Override
     public void onItemClick(int pos) {
         Intent intent = new Intent(Home.this , ProductDetails.class);
