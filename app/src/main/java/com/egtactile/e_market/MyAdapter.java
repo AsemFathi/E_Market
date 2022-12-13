@@ -19,7 +19,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyNewHolder> implements Recy
 
     private final RecyclerViewInterface recyclerViewInterface;
     public MyAdapter(Context context, List<items> itemsList,
-                     RecyclerViewInterface recyclerViewInterface) {
+                     RecyclerViewInterface recyclerViewInterface){
         this.context = context;
         this.itemsList = itemsList;
         this.recyclerViewInterface = recyclerViewInterface;

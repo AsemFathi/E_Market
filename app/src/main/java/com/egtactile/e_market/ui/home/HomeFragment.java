@@ -51,14 +51,14 @@ public class HomeFragment extends Fragment implements RecyclerViewInterface{
     String searchInput;
     Map<String , List<String>> data = new HashMap<>();
     List<String> info = new ArrayList<>();
-    List<items> itemsList = new ArrayList<items>();
+    List<items> itemsList;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-
+        itemsList = new ArrayList<items>();
         recyclerView = root.findViewById(R.id.recyclerView);
 
         searchText = root.findViewById(R.id.searchdata);
@@ -223,6 +223,8 @@ public class HomeFragment extends Fragment implements RecyclerViewInterface{
         super.onDestroyView();
         binding = null;
     }
+
+
     // open the item details when click on it
     @Override
     public void onItemClick(int pos) {
