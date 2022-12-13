@@ -150,7 +150,7 @@ public class Home extends AppCompatActivity implements RecyclerViewInterface {
 
                 }
                 recyclerView.setAdapter(new MyAdapter(getApplicationContext() ,itemsList , Home.this ));
-                Navigation.findNavController(navView).navigate(R.id.navigation_home);
+                //Navigation.findNavController(navView).navigate(R.id.navigation_home);
             }
 
             @Override
