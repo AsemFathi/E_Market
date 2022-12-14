@@ -51,7 +51,7 @@ public class HomeFragment extends Fragment implements RecyclerViewInterface{
     StorageReference storageReference;
     String urldisplay;
     EditText searchText;
-    Button searchView_btn,voice_search;
+    Button searchView_btn,voice_search,qr_search;
     String searchInput;
     Map<String , List<String>> data = new HashMap<>();
     List<String> info = new ArrayList<>();
@@ -67,6 +67,7 @@ public class HomeFragment extends Fragment implements RecyclerViewInterface{
         searchText = root.findViewById(R.id.searchdata);
         searchView_btn = root.findViewById(R.id.search_btn);
         voice_search = root.findViewById(R.id.img_voice);
+        qr_search = root.findViewById(R.id.img_scan);
         recyclerView.setLayoutManager(new LinearLayoutManager( getActivity()));
 
         user = FirebaseAuth.getInstance().getCurrentUser();
@@ -163,6 +164,12 @@ public class HomeFragment extends Fragment implements RecyclerViewInterface{
 
         });
         //search in data from firebase
+        qr_search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ScanCode();
+            }
+        });
         voice_search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -248,11 +255,9 @@ public class HomeFragment extends Fragment implements RecyclerViewInterface{
         });
         return root;
     }
-    //private void openVoiceDialog(){
-       //
-       //
-   // }
+    private void ScanCode() {
 
+    }
     @Override
     public void onDestroyView() {
         super.onDestroyView();
