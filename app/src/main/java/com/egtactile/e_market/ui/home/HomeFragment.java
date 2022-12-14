@@ -1,9 +1,14 @@
 package com.egtactile.e_market.ui.home;
 
 import static android.content.ContentValues.TAG;
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.speech.RecognizerIntent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,7 +36,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -47,12 +51,11 @@ public class HomeFragment extends Fragment implements RecyclerViewInterface{
     StorageReference storageReference;
     String urldisplay;
     EditText searchText;
-    Button searchView_btn;
+    Button searchView_btn,voice_search;
     String searchInput;
     Map<String , List<String>> data = new HashMap<>();
     List<String> info = new ArrayList<>();
     List<items> itemsList;
-
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
@@ -63,6 +66,7 @@ public class HomeFragment extends Fragment implements RecyclerViewInterface{
 
         searchText = root.findViewById(R.id.searchdata);
         searchView_btn = root.findViewById(R.id.search_btn);
+        voice_search = root.findViewById(R.id.img_voice);
         recyclerView.setLayoutManager(new LinearLayoutManager( getActivity()));
 
         user = FirebaseAuth.getInstance().getCurrentUser();
@@ -70,40 +74,58 @@ public class HomeFragment extends Fragment implements RecyclerViewInterface{
         databaseReference = firebaseDatabase.getReference().child("Products");
         storageReference = FirebaseStorage.getInstance().getReference();
 
+        ActivityResultLauncher<Intent> activityResultLaunch = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                new ActivityResultCallback<ActivityResult>() {
+                    @Override
+                    public void onActivityResult(ActivityResult result) {
+                        if (result.getData()!=null&&result.getResultCode() == getActivity().RESULT_OK) {
+                            Intent data =result.getData();
+                            if(data!=null)
+                            {
+                                //extract data
+                                String Psearch = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS).get(0);
+                                searchText.setText(Psearch);
+                            }
+
+                        } else{
+                            Toast.makeText(getActivity(),"Please, Try again", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
         //get data from firebase
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-               /* Map<String , Object> map = (Map) snapshot.getValue();  // get type
-                for (Map.Entry<String,Object > pair : map.entrySet()) {
-                    //System.out.println(String.format("Key (name) is: %s, Value (age) is : %s", pair.getKey(), pair.getValue()));
-                    //itemsList.add(new items("10" , pair.getKey(), R.drawable.main_app));
-                    Map<String , Object> map1 = (Map) snapshot.child(pair.getKey()).getValue(); // get name
-                    Log.i(TAG,"Type "+ pair.getKey() + "  " +pair.getValue());
-                    for (Map.Entry<String , Object> pair1 : map1.entrySet())
-                    {
-                        Log.i(TAG,"Name "+ pair1.getKey() + "  " +pair1.getValue());
-                        Map<String , Object> map2 = (Map) snapshot.child(pair.getKey()).child(pair1.getKey()).getValue();
-                        int i =0;
-                        for (Map.Entry<String , Object> pair2 : map2.entrySet())
-                        {
-                           // Map<String , Object> map2 = (Map)snapshot.child(pair.getKey()).child(pair1.getKey()).child(pair2.getKey()).getValue();
+       /* Map<String , Object> map = (Map) snapshot.getValue();  // get type
+        for (Map.Entry<String,Object > pair : map.entrySet()) {
+            //System.out.println(String.format("Key (name) is: %s, Value (age) is : %s", pair.getKey(), pair.getValue()));
+            //itemsList.add(new items("10" , pair.getKey(), R.drawable.main_app));
+            Map<String , Object> map1 = (Map) snapshot.child(pair.getKey()).getValue(); // get name
+            Log.i(TAG,"Type "+ pair.getKey() + "  " +pair.getValue());
+            for (Map.Entry<String , Object> pair1 : map1.entrySet())
+            {
+                Log.i(TAG,"Name "+ pair1.getKey() + "  " +pair1.getValue());
+                Map<String , Object> map2 = (Map) snapshot.child(pair.getKey()).child(pair1.getKey()).getValue();
+                int i =0;
+                for (Map.Entry<String , Object> pair2 : map2.entrySet())
+                {
+                   // Map<String , Object> map2 = (Map)snapshot.child(pair.getKey()).child(pair1.getKey()).child(pair2.getKey()).getValue();
 
-                            Log.i(TAG,"Price "+ pair2.getKey() + "  " +pair2.getValue());
-                            if (i == 0)
-                                itemsList.add(new items(pair2.getValue().toString() , pair1.getKey(), R.drawable.main_app));
-                            //
-                            i++;
-
-                        }
-
-                    }
+                    Log.i(TAG,"Price "+ pair2.getKey() + "  " +pair2.getValue());
+                    if (i == 0)
+                        itemsList.add(new items(pair2.getValue().toString() , pair1.getKey(), R.drawable.main_app));
+                    //
+                    i++;
 
                 }
 
-                */
-                for(DataSnapshot datax: snapshot.getChildren())
-                {
+            }
+
+        }
+
+        */
+                for (DataSnapshot datax : snapshot.getChildren()) {
 
                     String ProductName = datax.getKey();
                     String ProductType = datax.child("Category").getValue().toString();
@@ -112,7 +134,7 @@ public class HomeFragment extends Fragment implements RecyclerViewInterface{
                     String ProNum = datax.child("Num").getValue().toString();
                     String ProImageUrl = datax.child("Picture").getValue().toString();
                     String des = datax.child("Description").getValue().toString();
-                    Log.i(TAG, "onDataChange: Description" + des );
+                    Log.i(TAG, "onDataChange: Description" + des);
                     storageReference.child(ProImageUrl).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                         @Override
                         public void onSuccess(Uri uri) {
@@ -125,12 +147,12 @@ public class HomeFragment extends Fragment implements RecyclerViewInterface{
                     info.add(ProImageUrl.toLowerCase());
 
                     data.put(ProductName.toLowerCase(), info);
-                    itemsList.add(new items(ProPrice, ProductName, des, ProImageUrl , ProductType , ProNum));
+                    itemsList.add(new items(ProPrice, ProductName, des, ProImageUrl, ProductType, ProNum));
                     Log.i(TAG, "onDataChange: URL" + urldisplay);
 
 
                 }
-                recyclerView.setAdapter(new MyAdapter(getActivity() ,itemsList , HomeFragment.this ));
+                recyclerView.setAdapter(new MyAdapter(getActivity(), itemsList, HomeFragment.this));
                 //Navigation.findNavController(navView).navigate(R.id.navigation_home);
             }
 
@@ -140,8 +162,16 @@ public class HomeFragment extends Fragment implements RecyclerViewInterface{
             }
 
         });
-
         //search in data from firebase
+        voice_search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+                intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+                intent.putExtra(RecognizerIntent.EXTRA_PROMPT,"Tell me the ptoduct you want!");
+                activityResultLaunch.launch(intent);
+            }
+        });
         searchView_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -218,13 +248,16 @@ public class HomeFragment extends Fragment implements RecyclerViewInterface{
         });
         return root;
     }
+    //private void openVoiceDialog(){
+       //
+       //
+   // }
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
     }
-
-
     // open the item details when click on it
     @Override
     public void onItemClick(int pos) {
@@ -237,6 +270,8 @@ public class HomeFragment extends Fragment implements RecyclerViewInterface{
         intent.putExtra("image" , itemsList.get(pos).getImage());
         startActivity(intent);
     }
+
+
 /*
     @Override
     protected void onStart() {

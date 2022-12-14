@@ -36,25 +36,19 @@
             android:layout_height="41dp"
             android:id="@+id/search_btn"
             android:background="@color/fui_transparent"
-            android:drawableBottom="@drawable/search_btn"
-            tools:layout_editor_absoluteX="295dp"
-            tools:layout_editor_absoluteY="32dp"
-            android:layout_marginRight="10dp"/>
-        <ImageView
+            android:drawableBottom="@drawable/search_btn"/>
+        <Button
             android:id="@+id/img_voice"
-            android:layout_width="28dp"
-            android:layout_height="28dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="6dp"
-            android:src="@drawable/keyboard_voice" />
-
-        <ImageView
+            android:layout_width="48dp"
+            android:layout_height="41dp"
+            android:background="@color/fui_transparent"
+            android:drawableBottom="@drawable/keyboard_voice" />
+        <Button
             android:id="@+id/img_scan"
-            android:layout_width="28dp"
-            android:layout_height="28dp"
-            android:layout_marginLeft="4dp"
-            android:layout_marginRight="6dp"
-            android:src= "@drawable/qrcode_scanner"/>
+            android:layout_width="48dp"
+            android:layout_height="41dp"
+            android:background="@color/fui_transparent"
+            android:drawableBottom= "@drawable/qrcode_scanner"/>
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
