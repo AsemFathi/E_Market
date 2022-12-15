@@ -2,10 +2,11 @@ package com.egtactile.e_market;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
+import static android.content.ContentValues.TAG;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,6 +19,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -39,6 +41,7 @@ public class Add_Products extends AppCompatActivity {
     FirebaseDatabase database;
     StorageReference reference;
     DatabaseReference databaseReference;
+    //FirebaseUser firebaseUser;
     String path;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +64,7 @@ public class Add_Products extends AppCompatActivity {
         databaseReference = FirebaseDatabase.getInstance().getReference();
         database = FirebaseDatabase.getInstance();
 
+        Log.i(TAG, "onCreate: ID "  + auth);
         Choose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

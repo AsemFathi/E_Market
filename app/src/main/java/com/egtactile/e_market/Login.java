@@ -108,6 +108,8 @@ public class Login extends AppCompatActivity {
                     if (email.equals("asem12@gmail.com"))
                     {
                         Intent intent = new Intent(Login.this , Admin_Page.class);
+
+                        //intent.putExtra()
                         startActivity(intent);
                     }
                     else

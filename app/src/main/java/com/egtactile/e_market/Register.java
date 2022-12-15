@@ -84,7 +84,7 @@ public class Register extends AppCompatActivity {
                         if (task.isSuccessful())
                         {
                             firebaseUser= task.getResult().getUser();
-                            DatabaseReference newUser = reference.child(firebaseUser.getUid());
+                            DatabaseReference newUser = reference.child(name);
                            // String id = newUser.getKey();
                            // Log.i(TAG, "onComplete: ID " + id);
                             newUser.child("Full Name").setValue(name);

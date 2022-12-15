@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/loginapp"
     tools:context=".Login">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -35,11 +36,11 @@
             android:id="@+id/editTextTextPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
             android:layout_marginTop="2dp"
+            android:ems="10"
             android:hint="Password"
-            android:paddingLeft="10dp"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:paddingLeft="10dp" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -71,8 +72,8 @@
             android:id="@+id/lgn_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="#4A2885"
             android:layout_margin="5dp"
+            android:backgroundTint="#4A2885"
             android:text="Login" />
 
         <LinearLayout
@@ -102,7 +103,7 @@
         <TextView
             android:id="@+id/OR"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="191dp"
             android:layout_marginLeft="100dp"
             android:layout_marginTop="2dp"
             android:text="____________ OR ____________"

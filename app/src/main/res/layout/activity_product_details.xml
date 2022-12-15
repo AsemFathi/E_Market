@@ -137,26 +137,37 @@
        <ImageView
            android:layout_marginLeft="100dp"
 
-           android:id="@+id/im_re"
+           android:id="@+id/reduce"
            android:src="@drawable/ic_baseline_remove_24"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
+           android:layout_width="40dp"
+           android:layout_height="40dp"
            android:paddingEnd="5dp"/>
        <TextView
            android:id="@+id/tv_num"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:textSize="20sp"
-           android:text="1"
+           android:layout_width="40dp"
+           android:layout_height="40dp"
+           android:textSize="30dp"
+           android:text="  1"
            android:textStyle="bold"
            />
        <ImageView
            android:layout_marginStart="15dp"
-           android:id="@+id/im_ad"
+           android:id="@+id/im_add"
            android:src="@drawable/ic_baseline_add_24"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
+           android:layout_width="40dp"
+           android:layout_height="40dp"
            android:paddingEnd="5dp"/>
    </LinearLayout>
+
+    <Button
+        android:layout_marginTop="25dp"
+        android:layout_marginStart="130dp"
+        android:id="@+id/AddToCart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:text="Add to Cart"
+        android:textColor="#4B2885"
+        android:textStyle="bold" />
 
 </LinearLayout>
