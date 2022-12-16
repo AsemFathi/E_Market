@@ -5,6 +5,8 @@ import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -17,6 +19,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -36,6 +39,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.journeyapps.barcodescanner.ScanContract;
+import com.journeyapps.barcodescanner.ScanOptions;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -75,6 +81,7 @@ public class HomeFragment extends Fragment implements RecyclerViewInterface{
         databaseReference = firebaseDatabase.getReference().child("Products");
         storageReference = FirebaseStorage.getInstance().getReference();
 
+        //launch search by voice
         ActivityResultLauncher<Intent> activityResultLaunch = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
                 new ActivityResultCallback<ActivityResult>() {
@@ -94,6 +101,7 @@ public class HomeFragment extends Fragment implements RecyclerViewInterface{
                         }
                     }
                 });
+
         //get data from firebase
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -164,11 +172,9 @@ public class HomeFragment extends Fragment implements RecyclerViewInterface{
 
         });
         //search in data from firebase
-        qr_search.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ScanCode();
-            }
+        qr_search.setOnClickListener(v ->
+        {
+            scanCode();
         });
         voice_search.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -255,9 +261,24 @@ public class HomeFragment extends Fragment implements RecyclerViewInterface{
         });
         return root;
     }
-    private void ScanCode() {
-
+    private void scanCode()
+    {
+        ScanOptions options = new ScanOptions();
+        options.setPrompt("Volume up to flash on");
+        options.setBeepEnabled(true);
+        options.setOrientationLocked(true);
+        options.setCaptureActivity(CaptureAct.class);
+        barLauncher.launch(options);
     }
+    //launch search by voice
+    ActivityResultLauncher<ScanOptions> barLauncher = registerForActivityResult(new ScanContract(), result ->
+    {
+        if(result.getContents()!=null)
+        {
+            searchText.setText(result.getContents());
+
+        }
+    });
     @Override
     public void onDestroyView() {
         super.onDestroyView();
