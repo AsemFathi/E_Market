@@ -5,6 +5,8 @@ import android.annotation.SuppressLint;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Build;
@@ -20,6 +22,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.egtactile.e_market.ui.home.HomeFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -116,6 +119,7 @@ public class Login extends AppCompatActivity {
                     {
                         Intent intent = new Intent(Login.this, Home.class);
                         startActivity(intent);
+
                     }
                 } else
                     Toast.makeText(Login.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();

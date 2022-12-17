@@ -84,7 +84,7 @@ public class Register extends AppCompatActivity {
                         if (task.isSuccessful())
                         {
                             firebaseUser= task.getResult().getUser();
-                            DatabaseReference newUser = reference.child(name);
+                            DatabaseReference newUser = reference.child(email);
                            // String id = newUser.getKey();
                            // Log.i(TAG, "onComplete: ID " + id);
                             newUser.child("Full Name").setValue(name);
@@ -94,7 +94,6 @@ public class Register extends AppCompatActivity {
                             newUser.child("bithday").child("day").setValue(day);
                             newUser.child("bithday").child("month").setValue(month);
                             newUser.child("bithday").child("yearl").setValue(year);
-
 
                             Intent intent = new Intent(Register.this,Login.class);
                             Toast.makeText(Register.this, "Registration Done", Toast.LENGTH_SHORT).show();

@@ -1,6 +1,8 @@
 package com.egtactile.e_market.ui.home;
 
 import static android.content.ContentValues.TAG;
+import android.content.Intent;
+
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
@@ -76,11 +78,11 @@ public class HomeFragment extends Fragment implements RecyclerViewInterface{
         qr_search = root.findViewById(R.id.img_scan);
         recyclerView.setLayoutManager(new LinearLayoutManager( getActivity()));
 
+       // email = this.getArguments().getString("email");
         user = FirebaseAuth.getInstance().getCurrentUser();
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference().child("Products");
         storageReference = FirebaseStorage.getInstance().getReference();
-
         //launch search by voice
         ActivityResultLauncher<Intent> activityResultLaunch = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),

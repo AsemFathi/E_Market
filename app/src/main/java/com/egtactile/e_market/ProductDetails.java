@@ -11,8 +11,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.StorageReference;
@@ -29,7 +31,9 @@ Button AddToCart;
     FirebaseAuth auth;
     FirebaseDatabase database;
     DatabaseReference databaseReference;
+    FirebaseUser user;
     int quantity;
+    String email ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,12 +50,15 @@ Button AddToCart;
         Quantity = findViewById(R.id.tv_num);
         quantity = 0;
 
+        user = FirebaseAuth.getInstance().getCurrentUser();
         auth = FirebaseAuth.getInstance();
-        databaseReference = FirebaseDatabase.getInstance().getReference();
+        databaseReference = FirebaseDatabase.getInstance().getReference()
+                .child("Cart");
         database = FirebaseDatabase.getInstance();
-        DatabaseReference newData = databaseReference.child("Cart");
 
-        Log.i(TAG, "onCreate: ID: "+auth);
+
+        email = user.getEmail();
+        email = email.replaceAll("@gmail.com" , "");
 
         String name = getIntent().getStringExtra("Name");
         String type = getIntent().getStringExtra("Type");
@@ -103,16 +110,23 @@ Button AddToCart;
         AddToCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent();
-                intent.putExtra("Name" , name);
-                intent.putExtra("Type" , type);
-                intent.putExtra("Price" , price);
-                intent.putExtra("Quantity" , Quantity.getText().toString());
-                intent.putExtra("Description" , description);
-                intent.putExtra("image" , image);
+                if (quantity != 0)
+                {
+                    DatabaseReference newData = databaseReference.child(email).child(name);
+                    newData.child("Category").setValue(type);
+                    newData.child("Quantity").setValue(String.valueOf(quantity));
+                    newData.child("Price").setValue(price);
+                    newData.child("Picture").setValue(image);
+                    newData.child("Name").setValue(name);
+                    newData.child("Description").setValue(description);
+                    Toast.makeText(ProductDetails.this, "Added To Cart", Toast.LENGTH_LONG).show();
 
-                //intent.putExtra();
-            }
+                }
+                else
+                {
+                    Toast.makeText(ProductDetails.this, "Quantity of items = 0", Toast.LENGTH_LONG).show();
+                }
+                }
         });
 
     }
