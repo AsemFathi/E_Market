@@ -2,6 +2,7 @@ package com.egtactile.e_market.ui.basket;
 
 import static android.content.ContentValues.TAG;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,9 +19,14 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.egtactile.e_market.CartAdapter;
+import com.egtactile.e_market.MyAdapter;
+import com.egtactile.e_market.ProductDetails;
 import com.egtactile.e_market.R;
+import com.egtactile.e_market.RecyclerViewInterface;
 import com.egtactile.e_market.databinding.FragmentBasketBinding;
 import com.egtactile.e_market.items;
+import com.egtactile.e_market.ui.home.HomeFragment;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -37,7 +43,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class BasketFragment extends Fragment {
+public class BasketFragment extends Fragment implements RecyclerViewInterface {
 
     private FragmentBasketBinding binding;
 
@@ -47,20 +53,20 @@ public class BasketFragment extends Fragment {
     FirebaseUser user;
     StorageReference storageReference;
     String urldisplay;
-    EditText searchText;
-    Button searchView_btn,voice_search,qr_search;
-    String searchInput;
     Map<String , List<String>> data = new HashMap<>();
     List<String> info = new ArrayList<>();
     List<items> itemsList;
-String email;
+    String email;
+    TextView TotalPrice;
+    int Total_Price = 0;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentBasketBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-
+        TotalPrice = root.findViewById(R.id.total_price);
         itemsList = new ArrayList<items>();
-
+        recyclerView = root.findViewById(R.id.CartList);
+        recyclerView.setLayoutManager(new LinearLayoutManager( getActivity()));
         user = FirebaseAuth.getInstance().getCurrentUser();
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference().child("Cart");
@@ -79,12 +85,34 @@ String email;
                        Log.i(TAG, "onDataChange: Email : ");
                        for (DataSnapshot datax : dataSnapshot.getChildren()) {
                            Log.i(TAG, "onDataChange: Product : " + datax.getKey().toString());
+                           String ProductName = datax.getKey();
+                           String ProductType = datax.child("Category").getValue().toString();
+                           String ProPrice = datax.child("Price").getValue().toString();
+                           String ProNum = datax.child("Quantity").getValue().toString();
+                           String ProImageUrl = datax.child("Picture").getValue().toString();
+                           String des = datax.child("Description").getValue().toString();
+                           Log.i(TAG, "onDataChange: Description" + des);
+                           storageReference.child(ProImageUrl).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                               @Override
+                               public void onSuccess(Uri uri) {
+                                   urldisplay = uri.toString();
+                               }
+                           });
 
+                           info.add(ProPrice.toLowerCase());
+                           info.add(ProNum.toLowerCase());
+                           info.add(des.toLowerCase());
+                           info.add(ProImageUrl.toLowerCase());
+                           Total_Price += Integer.parseInt(ProPrice) * Integer.parseInt(ProNum);
+                           data.put(ProductName.toLowerCase(), info);
+                           itemsList.add(new items(ProPrice, ProductName, des, ProImageUrl, ProductType, ProNum));
 
                        }
                    }
 
                }
+               recyclerView.setAdapter(new CartAdapter(getActivity(), itemsList, BasketFragment.this));
+               TotalPrice.setText("Total Price : "+ String.valueOf(Total_Price));
             }
 
             @Override
@@ -102,5 +130,17 @@ String email;
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+
+    @Override
+    public void onItemClick(int pos) {
+        Intent intent = new Intent(getActivity() , ProductDetails.class);
+        intent.putExtra("Name" , itemsList.get(pos).getName());
+        intent.putExtra("Type" , itemsList.get(pos).getCategory());
+        intent.putExtra("Price" , itemsList.get(pos).getPrice());
+        intent.putExtra("Num" , itemsList.get(pos).getNum());
+        intent.putExtra("Description" , itemsList.get(pos).getDescription());
+        intent.putExtra("image" , itemsList.get(pos).getImage());
+        startActivity(intent);
     }
 }
