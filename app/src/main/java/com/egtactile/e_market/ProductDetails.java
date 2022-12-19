@@ -1,5 +1,7 @@
 package com.egtactile.e_market;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -15,10 +17,16 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
+
+import java.util.HashMap;
+import java.util.Locale;
 
 
 public class ProductDetails extends AppCompatActivity {
@@ -33,6 +41,7 @@ Button AddToCart;
     DatabaseReference databaseReference;
     FirebaseUser user;
     int quantity;
+    String num;
     String email ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,11 +58,11 @@ Button AddToCart;
         Reduce = findViewById(R.id.reduce);
         Quantity = findViewById(R.id.tv_num);
         quantity = 0;
-
+        num = "";
         user = FirebaseAuth.getInstance().getCurrentUser();
         auth = FirebaseAuth.getInstance();
         databaseReference = FirebaseDatabase.getInstance().getReference()
-                .child("Cart");
+                .child("Products");
         database = FirebaseDatabase.getInstance();
 
 
@@ -63,26 +72,54 @@ Button AddToCart;
         String name = getIntent().getStringExtra("Name");
         String type = getIntent().getStringExtra("Type");
         String price = getIntent().getStringExtra("Price");
-        String num = getIntent().getStringExtra("Num");
+        String quan = getIntent().getStringExtra("Num");
         String description = getIntent().getStringExtra("Description");
         String image = getIntent().getStringExtra("image");
 
+
+        //*************************************
+
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot datax: snapshot.getChildren())
+                {
+                    String ProductName = datax.getKey();
+                    Log.i(TAG, "onDataChange: Product "+ ProductName);
+                    Log.i(TAG, "onDataChange: Name " + name);
+                    if (ProductName.toLowerCase().contains(name.toLowerCase())) {
+                        num = datax.child("Num").getValue().toString();
+                        Num.setText(num);
+                        Log.i(TAG, "onDataChange: True" + num);
+                    }
+                }
+
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
+        //*************************************
 
         Picasso.get()
                 .load(image)
                 .into(imageView);
 
         Name.setText(name);
-        Num.setText(num);
+        Log.i(TAG, "onCreate: True" + num);
+
         Price.setText(price);
         Description.setText(description);
         Type.setText(type);
         Add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (Integer.parseInt(Quantity.getText().toString()) >= Integer.parseInt(num))
+                if (Integer.parseInt(Quantity.getText().toString()) >= Integer.parseInt(quan))
                 {
-                    Quantity.setText(num);
+                    Quantity.setText(quan);
                 }
                 else
                 {
@@ -119,7 +156,16 @@ Button AddToCart;
                     newData.child("Picture").setValue(image);
                     newData.child("Name").setValue(name);
                     newData.child("Description").setValue(description);
-                    Toast.makeText(ProductDetails.this, "Added To Cart", Toast.LENGTH_LONG).show();
+                    int x = Integer.parseInt(num) - quantity;
+                    newData.child("Num").setValue(String.valueOf(x));
+
+                    DatabaseReference databaseReference1 = FirebaseDatabase.getInstance().getReference()
+                            .child("Products");
+
+                    HashMap map = new HashMap<>();
+                    map.put("Num" , String.valueOf(x));
+
+                    databaseReference1.child(name).updateChildren(map);
 
                 }
                 else

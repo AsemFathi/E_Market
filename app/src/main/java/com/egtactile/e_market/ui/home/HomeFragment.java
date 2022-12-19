@@ -139,6 +139,7 @@ public class HomeFragment extends Fragment implements RecyclerViewInterface{
                 for (DataSnapshot datax : snapshot.getChildren()) {
 
                     String ProductName = datax.getKey();
+                    Log.i(TAG, "onDataChange: Name" + ProductName);
                     String ProductType = datax.child("Category").getValue().toString();
                     //String ProductName = datax.getKey();
                     String ProPrice = datax.child("Price").getValue().toString();

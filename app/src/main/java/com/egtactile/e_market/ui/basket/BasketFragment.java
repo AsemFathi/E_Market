@@ -21,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.egtactile.e_market.CartAdapter;
 import com.egtactile.e_market.MyAdapter;
+import com.egtactile.e_market.ProductCartDetails;
 import com.egtactile.e_market.ProductDetails;
 import com.egtactile.e_market.R;
 import com.egtactile.e_market.RecyclerViewInterface;
@@ -38,27 +39,30 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 public class BasketFragment extends Fragment implements RecyclerViewInterface {
 
     private FragmentBasketBinding binding;
 
+    Button Next;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
     RecyclerView recyclerView;
     FirebaseUser user;
     StorageReference storageReference;
     String urldisplay;
-    Map<String , List<String>> data = new HashMap<>();
+    Map<String , String> data ;
     List<String> info = new ArrayList<>();
-    List<items> itemsList;
+    static List<items> itemsList=new ArrayList<items>();
     String email;
     TextView TotalPrice;
-    int Total_Price = 0;
+    static int Total_Price ;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentBasketBinding.inflate(inflater, container, false);
@@ -66,6 +70,8 @@ public class BasketFragment extends Fragment implements RecyclerViewInterface {
         TotalPrice = root.findViewById(R.id.total_price);
         itemsList = new ArrayList<items>();
         recyclerView = root.findViewById(R.id.CartList);
+        data = new HashMap<>();
+        Next = root.findViewById(R.id.Next_btn);
         recyclerView.setLayoutManager(new LinearLayoutManager( getActivity()));
         user = FirebaseAuth.getInstance().getCurrentUser();
         firebaseDatabase = FirebaseDatabase.getInstance();
@@ -73,6 +79,7 @@ public class BasketFragment extends Fragment implements RecyclerViewInterface {
         storageReference = FirebaseStorage.getInstance().getReference();
         email = user.getEmail();
         email = email.replaceAll("@gmail.com" , "");
+        Total_Price = 0;
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -91,6 +98,7 @@ public class BasketFragment extends Fragment implements RecyclerViewInterface {
                            String ProNum = datax.child("Quantity").getValue().toString();
                            String ProImageUrl = datax.child("Picture").getValue().toString();
                            String des = datax.child("Description").getValue().toString();
+                           String ProNumber = datax.child("Num").getValue().toString();
                            Log.i(TAG, "onDataChange: Description" + des);
                            storageReference.child(ProImageUrl).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                                @Override
@@ -99,12 +107,9 @@ public class BasketFragment extends Fragment implements RecyclerViewInterface {
                                }
                            });
 
-                           info.add(ProPrice.toLowerCase());
-                           info.add(ProNum.toLowerCase());
-                           info.add(des.toLowerCase());
-                           info.add(ProImageUrl.toLowerCase());
+
                            Total_Price += Integer.parseInt(ProPrice) * Integer.parseInt(ProNum);
-                           data.put(ProductName.toLowerCase(), info);
+                           data.put(ProductName.toLowerCase(), ProNumber);
                            itemsList.add(new items(ProPrice, ProductName, des, ProImageUrl, ProductType, ProNum));
 
                        }
@@ -118,6 +123,15 @@ public class BasketFragment extends Fragment implements RecyclerViewInterface {
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
+            }
+        });
+
+        Next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity() , ProductCartDetails.class);
+                intent.putExtra("Price" , String.valueOf(Total_Price));
+                startActivity(intent);
             }
         });
 
@@ -143,4 +157,20 @@ public class BasketFragment extends Fragment implements RecyclerViewInterface {
         intent.putExtra("image" , itemsList.get(pos).getImage());
         startActivity(intent);
     }
+
+    public List<items> getItemsList()
+    {
+        return itemsList;
+    }
+    public Map<String , String> getData()
+    {
+
+        Log.i(TAG, "getData: Data "+data);
+        return data;
+    }
+    public int getTotal_Price()
+    {
+        return Total_Price;
+    }
+
 }
