@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    android:orientation="vertical"
+    tools:context=".FeedbackActivity">
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Please write your feedback"
+    android:layout_marginTop="10dp"
+    />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Your feedback"
+        android:layout_marginTop="40dp"
+
+        android:id="@+id/FeedbackEditText"
+
+        />
+
+    <RatingBar
+        android:id="@+id/simpleRatingBar"
+
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="60dp"
+        android:layout_marginStart="30dp"
+        android:rating="2.5" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:text="Save"
+        android:id="@+id/Save_btn"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="10dp"
+        android:paddingBottom="10dp"
+        />
+
+
+</LinearLayout>

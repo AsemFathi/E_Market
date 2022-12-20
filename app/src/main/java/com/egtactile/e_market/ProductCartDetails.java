@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -38,14 +39,16 @@ public class ProductCartDetails extends AppCompatActivity implements RecyclerVie
         recyclerView = findViewById(R.id.recyclerViewCartDetails);
         Confirm = findViewById(R.id.btn_Confirm);
         recyclerView.setLayoutManager(new LinearLayoutManager(ProductCartDetails.this));
-        recyclerView.setAdapter(new ProductAdapter(this , itemsList , this));
+        recyclerView.setAdapter(new CartAdapter(this , itemsList , this));
         TotalPrice = findViewById(R.id.total_price_Activity);
         TotalPrice.setText("Total Price : " + String.valueOf(total_price));
 
         Confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                // Confirm activity
+                Intent intent = new Intent(ProductCartDetails.this ,MapsActivity.class );
+                startActivity(intent);
             }
         });
     }

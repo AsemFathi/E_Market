@@ -2,14 +2,17 @@ package com.egtactile.e_market;
 
 import static android.content.ContentValues.TAG;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.egtactile.e_market.ui.basket.BasketFragment;
@@ -137,6 +140,12 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductHolder> implemen
                 FirebaseUpdate(position , num);
             }
         });
+        holder.Delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DeleteItem(itemsList.get(position).getName() , itemsList.get(position).getNum());
+            }
+        });
 
     }
     @Override
@@ -144,8 +153,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductHolder> implemen
         return itemsList.size();
     }
 
-    public void FirebaseUpdate (int pos , String num)
-    {
+    public void FirebaseUpdate (int pos , String num) {
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String email = user.getEmail();
@@ -172,4 +180,37 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductHolder> implemen
 
     }
 
+    public void DeleteItem(String Name , String Num) {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String email = user.getEmail();
+        email = email.replaceAll("@gmail.com" , "");
+        DatabaseReference databaseReference2 = FirebaseDatabase
+                .getInstance().getReference().child("Cart").child(email);
+
+       /* databaseReference1.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                int  num = Integer.parseInt(snapshot.child(Name).child("Num").getValue().toString());
+                int x = Integer.parseInt(Num);
+                int s = num + x;
+                databaseReference1.child(Name).child("Num").setValue(s);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+*/
+
+        databaseReference2.child(Name).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful())
+                    Toast.makeText(context, "Product is deleted", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 }

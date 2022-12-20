@@ -21,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.egtactile.e_market.CartAdapter;
 import com.egtactile.e_market.MyAdapter;
+import com.egtactile.e_market.ProductAdapter;
 import com.egtactile.e_market.ProductCartDetails;
 import com.egtactile.e_market.ProductDetails;
 import com.egtactile.e_market.R;
@@ -79,17 +80,19 @@ public class BasketFragment extends Fragment implements RecyclerViewInterface {
         storageReference = FirebaseStorage.getInstance().getReference();
         email = user.getEmail();
         email = email.replaceAll("@gmail.com" , "");
-        Total_Price = 0;
+
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                itemsList = new ArrayList<items>();
+                Total_Price = 0;
                for (DataSnapshot dataSnapshot : snapshot.getChildren())
                {
 
-                   Log.i(TAG, "onDataChange: Child "+ dataSnapshot.getChildren().toString());
+                   Log.i(TAG, "onDataChange: Child "+ email);
                    if (dataSnapshot.getKey().equals(email))
                    {
-                       Log.i(TAG, "onDataChange: Email : ");
+                       Log.i(TAG, "onDataChange: Email : " + email);
                        for (DataSnapshot datax : dataSnapshot.getChildren()) {
                            Log.i(TAG, "onDataChange: Product : " + datax.getKey().toString());
                            String ProductName = datax.getKey();
@@ -116,7 +119,7 @@ public class BasketFragment extends Fragment implements RecyclerViewInterface {
                    }
 
                }
-               recyclerView.setAdapter(new CartAdapter(getActivity(), itemsList, BasketFragment.this));
+               recyclerView.setAdapter(new ProductAdapter(getActivity(), itemsList, BasketFragment.this));
                TotalPrice.setText("Total Price : "+ String.valueOf(Total_Price));
             }
 

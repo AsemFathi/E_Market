@@ -38,7 +38,7 @@ Button AddToCart;
 
     FirebaseAuth auth;
     FirebaseDatabase database;
-    DatabaseReference databaseReference;
+    DatabaseReference databaseReference , reference;
     FirebaseUser user;
     int quantity;
     String num;
@@ -62,6 +62,8 @@ Button AddToCart;
         user = FirebaseAuth.getInstance().getCurrentUser();
         auth = FirebaseAuth.getInstance();
         databaseReference = FirebaseDatabase.getInstance().getReference()
+                .child("Cart");
+        reference = FirebaseDatabase.getInstance().getReference()
                 .child("Products");
         database = FirebaseDatabase.getInstance();
 
@@ -79,7 +81,7 @@ Button AddToCart;
 
         //*************************************
 
-        databaseReference.addValueEventListener(new ValueEventListener() {
+        reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot datax: snapshot.getChildren())

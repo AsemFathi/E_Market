@@ -136,6 +136,7 @@ public class HomeFragment extends Fragment implements RecyclerViewInterface{
         }
 
         */
+                itemsList = new ArrayList<items>();
                 for (DataSnapshot datax : snapshot.getChildren()) {
 
                     String ProductName = datax.getKey();

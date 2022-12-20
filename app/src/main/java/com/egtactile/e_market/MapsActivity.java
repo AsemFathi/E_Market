@@ -1,5 +1,6 @@
 package com.egtactile.e_market;
 
+import static android.content.ContentValues.TAG;
 import static android.widget.Toast.makeText;
 
 import androidx.annotation.NonNull;
@@ -9,18 +10,24 @@ import androidx.fragment.app.FragmentActivity;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
 import android.location.LocationRequest;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.egtactile.e_market.ui.home.HomeFragment;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -31,9 +38,19 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.egtactile.e_market.databinding.ActivityMapsBinding;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.google.protobuf.DescriptorProtos;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.PermissionToken;
@@ -43,6 +60,9 @@ import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.single.PermissionListener;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -58,6 +78,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     myLocationListener locationlistener ;
     LocationManager loc_manager;
+    FirebaseUser user;
+    String urldisplay;
+    StorageReference storageReference;
+    String email;
+    static int Total_Price ;
+    static List<items> itemsList=new ArrayList<items>();
+    Button Confirm;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,6 +99,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
          //LocationRequest locationRequest = LocationRequest.create();
         addressText = (TextInputEditText) findViewById(R.id.addresstxt);
         countrynameText = (TextInputEditText) findViewById(R.id.countryname);
+        user= FirebaseAuth.getInstance().getCurrentUser();
+        storageReference = FirebaseStorage.getInstance().getReference();
+        email = user.getEmail();
+        email = email.replaceAll("@gmail.com" , "");
+
+        Confirm = findViewById(R.id.Confirm_Shopping);
 
         locationlistener = new myLocationListener(MapsActivity.this) ;
         loc_manager=(LocationManager) getSystemService(Context.LOCATION_SERVICE);
@@ -84,6 +117,77 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        Confirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                DatabaseReference reference = FirebaseDatabase.getInstance().getReference()
+                        .child("Sold").child(email);
+                DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference()
+                        .child("Cart");
+                databaseReference.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        for (DataSnapshot dataSnapshot : snapshot.getChildren())
+                        {
+                            if (dataSnapshot.getKey().equals(email))
+                            {
+                                for (DataSnapshot datax : dataSnapshot.getChildren()) {
+                                    Log.i(TAG, "onDataChange: Product : " + datax.getKey().toString());
+                                    String ProductName = datax.getKey();
+                                    String ProductType = datax.child("Category").getValue().toString();
+                                    String ProPrice = datax.child("Price").getValue().toString();
+                                    String ProNum = datax.child("Quantity").getValue().toString();
+                                    String ProImageUrl = datax.child("Picture").getValue().toString();
+                                    String des = datax.child("Description").getValue().toString();
+                                    String ProNumber = datax.child("Num").getValue().toString();
+                                    Log.i(TAG, "onDataChange: Description" + des);
+                                    storageReference.child(ProImageUrl).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                        @Override
+                                        public void onSuccess(Uri uri) {
+                                            urldisplay = uri.toString();
+                                        }
+                                    });
+                                    DatabaseReference newData = reference.child(ProductName);
+                                    newData.child("Category").setValue(ProductType);
+                                    newData.child("Quantity").setValue(ProNum);
+                                    newData.child("Price").setValue(ProPrice);
+                                    newData.child("Picture").setValue(ProImageUrl);
+                                    newData.child("Name").setValue(ProductName);
+                                    newData.child("Description").setValue(des);
+                                    String date = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+                                    newData.child("Date").setValue(date);
+                                    Total_Price += Integer.parseInt(ProPrice) * Integer.parseInt(ProNum);
+                                    itemsList.add(new items(ProPrice, ProductName, des, ProImageUrl, ProductType, ProNum));
+
+                                }
+                            }
+
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
+                databaseReference.child(email).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful())
+                            Toast.makeText(MapsActivity.this, "Product is deleted", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                Intent intent = new Intent(MapsActivity.this , FeedbackActivity.class);
+                startActivity(intent);
+
+            }
+        });
+
+
     }
 
     /**

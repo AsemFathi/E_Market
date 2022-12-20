@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="150dp"
+    android:layout_height="wrap_content"
     android:layout_marginTop="2dp">
 
     <ImageView
@@ -12,7 +12,7 @@
 
     <TextView
         android:id="@+id/ItemNameCartDetails"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:layout_toRightOf="@+id/imageViewCartDetails"
         android:layout_marginLeft="10dp"
@@ -21,6 +21,16 @@
         android:layout_toEndOf="@+id/imageViewCartDetails"
 
         android:text="Name" />
+
+    <ImageView
+        android:id="@+id/delete_img"
+        android:layout_width="56dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="219dp"
+        android:layout_marginTop="10dp"
+
+        android:src="@drawable/ic_baseline_remove_shopping_cart_24" />
 
     <TextView
         android:layout_width="100dp"
@@ -74,7 +84,7 @@
     <TextView
         android:id="@+id/ItemDescriptionCartDetails"
         android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:layout_height="wrap_content"
 
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
@@ -85,9 +95,9 @@
         android:text="Description" />
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="20dp"
         android:layout_below="@id/ItemDescriptionCartDetails"
-        android:text="---------------------------------------------------------------------------------"
+        android:text="-------------------------------------------------------------"
         android:textSize="25dp"
 
         />
