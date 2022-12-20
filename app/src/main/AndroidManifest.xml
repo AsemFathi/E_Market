@@ -20,28 +20,24 @@
         android:theme="@style/Theme.E_Market"
         tools:targetApi="31">
         <activity
-            android:name=".RecieveFeedback"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
             android:name=".FeedbackActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyAQxA87n1tZ9SyOl21LUl18YhHsl0mzftI" />
-
         <activity
             android:name=".MapsActivity"
             android:exported="true"
-            android:label="@string/title_activity_maps" />
+            android:label="@string/title_activity_maps"
+            android:theme="@style/Theme.MaterialComponents.DayNight.DarkActionBar">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
         <activity
             android:name=".ProductCartDetails"
             android:exported="false">
@@ -124,7 +120,6 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

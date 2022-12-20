@@ -1,123 +1,128 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:background="@drawable/background">
-
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+    <Toolbar
         android:layout_width="match_parent"
-        android:layout_height="41dp"
-        android:layout_weight="1"
-        android:background="#8D24A9"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme" />
+        android:layout_height="40dp"
+        android:background="#8E24AA"
+        android:title="EMarket"
+        android:titleTextColor="#FFFFFF"/>
 
-
-    <com.google.android.material.textfield.TextInputLayout
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:id="@+id/namelayout"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
-        android:layout_marginEnd="25dp"
-        android:hint="Name"
-        app:startIconDrawable="@drawable/profile"
-        app:counterEnabled="true"
-        app:counterMaxLength="20"
-        app:endIconMode="clear_text">
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/nametxt"
+        android:layout_height="match_parent">
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:maxLength="21"/>
+            android:orientation="vertical">
 
-    </com.google.android.material.textfield.TextInputLayout>
-    <com.google.android.material.textfield.TextInputLayout
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:id="@+id/phonelayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
-        android:layout_marginEnd="25dp"
-        android:hint="Phone"
-        app:startIconDrawable="@drawable/local_phone"
-        app:endIconMode="clear_text">
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/phonetxt"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:maxLength="21"/>
-    </com.google.android.material.textfield.TextInputLayout>
-    <com.google.android.material.textfield.TextInputLayout
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:id="@+id/addresstxtlayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
-        android:layout_marginEnd="25dp"
-        android:hint="Address"
-        app:startIconDrawable="@drawable/edit_location_24"
-        app:endIconMode="clear_text">
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/addresstxt"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:maxLength="21"/>
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/countrynamelayout"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="169dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="25dp"
-            android:hint="Country"
-            app:endIconMode="clear_text">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/countryname"
-                android:layout_width="159dp"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/namelayout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:maxLength="21" />
-        </com.google.android.material.textfield.TextInputLayout>
-    </LinearLayout>
+                android:layout_marginStart="25dp"
+                android:layout_marginEnd="25dp"
+                android:hint="Name"
+                app:counterEnabled="true"
+                app:counterMaxLength="20"
+                app:endIconMode="clear_text"
+                app:startIconDrawable="@drawable/profile">
 
-    <LinearLayout
-        android:layout_width="397dp"
-        android:layout_height="339dp"
-        android:layout_margin="7dp"
-        android:orientation="vertical">
-        <fragment xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:map="http://schemas.android.com/apk/res-auto"
-            xmlns:tools="http://schemas.android.com/tools"
-            android:id="@+id/map"
-            android:name="com.google.android.gms.maps.SupportMapFragment"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:context=".MapsActivity" />
-    </LinearLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/nametxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLength="21" />
 
-    <Button
-        android:id="@+id/Confirm_Shopping"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginBottom="7dp"
-        android:backgroundTint="#8E24AA"
-        android:fontFamily="@font/mogra"
-        android:text="Confirm"
-        android:textColor="#FFFFFF"
-        android:textAlignment="center"
-        android:textAllCaps="false"
-        android:textSize="20dp" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:id="@+id/phonelayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:layout_marginEnd="25dp"
+                android:hint="Phone"
+                app:startIconDrawable="@drawable/local_phone"
+                app:endIconMode="clear_text">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/phonetxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLength="21"/>
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:id="@+id/addresstxtlayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:layout_marginEnd="25dp"
+                android:hint="Address"
+                app:startIconDrawable="@drawable/edit_location_24"
+                app:endIconMode="clear_text">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/addresstxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </com.google.android.material.textfield.TextInputLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/countrynamelayout"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="169dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="25dp"
+                    android:hint="Country"
+                    app:endIconMode="clear_text">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/countryname"
+                        android:layout_width="159dp"
+                        android:layout_height="wrap_content"
+                        android:maxLength="21" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="433dp"
+                android:layout_height="396dp"
+                android:layout_margin="7dp"
+                android:orientation="vertical">
+                <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+                    xmlns:map="http://schemas.android.com/apk/res-auto"
+                    xmlns:tools="http://schemas.android.com/tools"
+                    android:id="@+id/map"
+                    android:name="com.google.android.gms.maps.SupportMapFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    tools:context=".MapsActivity" />
+            </LinearLayout>
+            <Button
+                android:id="@+id/Confirm_Shopping"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="7dp"
+                android:backgroundTint="#8E24AA"
+                android:fontFamily="@font/mogra"
+                android:text="Confirm"
+                android:textColor="#FFFFFF"
+                android:textAlignment="center"
+                android:textAllCaps="false"
+                android:textSize="20dp" />
+
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>
+

@@ -9,9 +9,12 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
 import android.Manifest;
+import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -67,15 +70,12 @@ import java.util.List;
 import java.util.Locale;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
-
+    ActionBar actionbar;
     private GoogleMap mMap;
     private ActivityMapsBinding binding;
-    FusedLocationProviderClient fusedLocationProviderClient;
     SupportMapFragment mapFragment;
-    Location currentLocation;
     TextInputEditText addressText;
     TextInputEditText countrynameText;
-
     myLocationListener locationlistener ;
     LocationManager loc_manager;
     FirebaseUser user;
@@ -91,10 +91,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
          binding = ActivityMapsBinding.inflate(getLayoutInflater());
          setContentView(binding.getRoot());
-         //addressText = (EditText) findViewById(R.id.currentlocation);
 
-         //ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.ACCESS_COARSE_LOCATION,
-         //Manifest.permission.ACCESS_FINE_LOCATION},PackageManager.PERMISSION_GRANTED);
+         ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.ACCESS_COARSE_LOCATION,
+         Manifest.permission.ACCESS_FINE_LOCATION},PackageManager.PERMISSION_GRANTED);
 
          //LocationRequest locationRequest = LocationRequest.create();
         addressText = (TextInputEditText) findViewById(R.id.addresstxt);
@@ -187,7 +186,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         });
 
-
     }
 
     /**
@@ -237,7 +235,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.setOnMarkerDragListener(new GoogleMap.OnMarkerDragListener() {
             @Override
             public void onMarkerDrag(@NonNull Marker marker) {
-
             }
             @Override
             public void onMarkerDragEnd(@NonNull Marker marker) {

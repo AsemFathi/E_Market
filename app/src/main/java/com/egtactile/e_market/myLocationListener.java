@@ -17,7 +17,6 @@ public class myLocationListener implements LocationListener {
 
     @Override
     public void onLocationChanged(@NonNull Location location) {
-        Toast.makeText(activitycontext,location.getLatitude()+","+location.getLongitude(),Toast.LENGTH_LONG).show();
     }
 
     @Override
