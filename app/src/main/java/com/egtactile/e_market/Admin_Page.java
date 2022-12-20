@@ -15,6 +15,7 @@ public class Admin_Page extends AppCompatActivity {
 
     Button Add;
     Button Feedback;
+    Button Report;
     FirebaseAuth auth;
     DatabaseReference reference;
     @Override
@@ -23,8 +24,10 @@ public class Admin_Page extends AppCompatActivity {
         setContentView(R.layout.activity_admin_page);
         Add = findViewById(R.id.add_btn);
         Feedback = findViewById(R.id.delete_btn);
+        Report = findViewById(R.id.reportbtn);
         auth = FirebaseAuth.getInstance();
         reference = FirebaseDatabase.getInstance().getReference().child("Products");
+
 
         Add.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -33,7 +36,6 @@ public class Admin_Page extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
         Feedback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -41,7 +43,12 @@ public class Admin_Page extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        Report.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+            }
+        });
 
     }
 }
