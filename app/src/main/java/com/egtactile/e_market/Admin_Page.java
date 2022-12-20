@@ -14,7 +14,7 @@ import com.google.firebase.database.FirebaseDatabase;
 public class Admin_Page extends AppCompatActivity {
 
     Button Add;
-    Button Delete;
+    Button Feedback;
     FirebaseAuth auth;
     DatabaseReference reference;
     @Override
@@ -22,7 +22,7 @@ public class Admin_Page extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_page);
         Add = findViewById(R.id.add_btn);
-        Delete = findViewById(R.id.delete_btn);
+        Feedback = findViewById(R.id.delete_btn);
         auth = FirebaseAuth.getInstance();
         reference = FirebaseDatabase.getInstance().getReference().child("Products");
 
@@ -30,6 +30,14 @@ public class Admin_Page extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Admin_Page.this , Add_Products.class);
+                startActivity(intent);
+            }
+        });
+
+        Feedback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Admin_Page.this , RecieveFeedback.class);
                 startActivity(intent);
             }
         });
