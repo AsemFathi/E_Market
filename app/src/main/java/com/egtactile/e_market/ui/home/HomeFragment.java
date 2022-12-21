@@ -138,7 +138,6 @@ public class HomeFragment extends Fragment implements RecyclerViewInterface{
         */
                 itemsList = new ArrayList<items>();
                 for (DataSnapshot datax : snapshot.getChildren()) {
-
                     String ProductName = datax.getKey();
                     Log.i(TAG, "onDataChange: Name" + ProductName);
                     String ProductType = datax.child("Category").getValue().toString();
@@ -175,6 +174,7 @@ public class HomeFragment extends Fragment implements RecyclerViewInterface{
             }
 
         });
+
         //search in data from firebase
         qr_search.setOnClickListener(v ->
         {
@@ -204,7 +204,6 @@ public class HomeFragment extends Fragment implements RecyclerViewInterface{
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         for(DataSnapshot datax: snapshot.getChildren())
                         {
-
                             String ProductName = datax.getKey();
                             String ProductType = datax.child("Category").getValue().toString();
                             if (ProductName.toLowerCase().contains(searchInput.toLowerCase()) ||

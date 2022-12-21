@@ -46,7 +46,8 @@ public class Admin_Page extends AppCompatActivity {
         Report.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(Admin_Page.this , Report.class);
+                startActivity(intent);
             }
         });
 

@@ -69,8 +69,6 @@ public class Login extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
                 String email = Email.getText().toString();
                 String password = Password.getText().toString();
                 if (!email.isEmpty() && !password.isEmpty()) {

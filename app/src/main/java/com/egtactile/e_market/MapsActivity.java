@@ -155,11 +155,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                     newData.child("Picture").setValue(ProImageUrl);
                                     newData.child("Name").setValue(ProductName);
                                     newData.child("Description").setValue(des);
-                                    String date = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+                                    String date = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
                                     newData.child("Date").setValue(date);
                                     Total_Price += Integer.parseInt(ProPrice) * Integer.parseInt(ProNum);
                                     itemsList.add(new items(ProPrice, ProductName, des, ProImageUrl, ProductType, ProNum));
-
                                 }
                             }
 

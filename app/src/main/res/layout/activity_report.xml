@@ -7,5 +7,116 @@
     android:orientation="vertical"
     android:background="@drawable/background"
     tools:context=".Report">
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="#8E24AA"
+        android:minHeight="3dp"
+        android:theme="?attr/actionBarTheme" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/datelayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:hint="Date"
+            android:textColorHint="#8D24A9"
+            app:boxStrokeColor="#8D24A9"
+            app:boxStrokeWidth="2dp"
+            app:endIconCheckable="true"
+            app:endIconMode="clear_text"
+            app:startIconDrawable="@drawable/date_range"
+            android:layout_marginEnd="10dp"
+            app:startIconTint="#480859">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/datetxt"
+                android:layout_width="256dp"
+                android:layout_height="wrap_content"
+                android:hint="dd-mm-yyyy"
+                android:textAlignment="textEnd"
+                android:textColorHint="#8D24A9" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+        <CheckBox
+            android:id="@+id/alltimecheckBox"
+            android:layout_width="92dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="9dp"
+            android:layout_weight="1"
+            android:text="All time"
+            android:textStyle="bold"
+            android:textColor="#8D24A9" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="10dp"
+            android:id="@+id/UserPreview"
+            android:orientation="horizontal"
+            >
+            <RadioButton
+                android:id="@+id/specificuser"
+                android:layout_width="147dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="70dp"
+                android:text="Specific user"
+                android:textColor="#33083E"/>
+            <RadioButton
+                android:id="@+id/allusers"
+                android:layout_width="145dp"
+                android:layout_height="wrap_content"
+                android:text="All users"
+                android:textColor="#33083E"/>
+        </RadioGroup>
+    </LinearLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/namelayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="282dp"
+        android:layout_height="wrap_content"
+        app:endIconCheckable="true"
+        android:layout_gravity="center"
+        android:hint="User Name"
+        app:endIconMode="clear_text"
+        android:textColorHint="#8D24A9"
+        app:startIconDrawable="@drawable/profile"
+        app:startIconTint="#480859"
+        app:boxStrokeColor="#8D24A9"
+        app:boxStrokeWidth="2dp">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/username_search"
+            android:layout_width="282dp"
+            android:layout_height="wrap_content"/>
+    </com.google.android.material.textfield.TextInputLayout>
+    <Button
+        android:id="@+id/confirmbtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Search"
+        android:outlineSpotShadowColor="@color/black"
+        android:backgroundTint="#A235BF"
+        android:textAllCaps="false"
+        android:layout_gravity="center"
+        android:textColor="#FFFFFF" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/orders_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="597dp" />
 </LinearLayout>
