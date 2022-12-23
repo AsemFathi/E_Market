@@ -57,7 +57,6 @@ public class Chart extends AppCompatActivity {
                         if (products.containsKey(productName)) {
                             int data = Integer.parseInt(productQuantity);
                             int result = products.get(productName) + data;
-
                             products.replace(productName, result);
                         } else {
                             products.put(productName, Integer.parseInt(productQuantity));
@@ -98,9 +97,5 @@ public class Chart extends AppCompatActivity {
 
             }
         });
-
-
-
-
     }
 }

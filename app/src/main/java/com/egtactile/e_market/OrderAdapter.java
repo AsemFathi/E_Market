@@ -48,7 +48,6 @@ public class OrderAdapter extends RecyclerView.Adapter<Orderholder> implements R
     @Override
     public void onBindViewHolder(@NonNull Orderholder holder, int position) {
         holder.showuser.setText(userss.get(position).toString());
-
         dataref.child(userss.get(position).toString()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

@@ -20,7 +20,6 @@ public class ProductHolder extends RecyclerView.ViewHolder {
     public ProductHolder(@NonNull View itemView ,RecyclerViewInterface recyclerViewInterface) {
         super(itemView);
 
-
         Name = itemView.findViewById(R.id.ItemNameCartDetails);
         Price = itemView.findViewById(R.id.ItemPriceCartDetails);
         Description = itemView.findViewById(R.id.ItemDescriptionCartDetails);

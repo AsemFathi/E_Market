@@ -48,18 +48,13 @@ public class Register extends AppCompatActivity {
         calendarView = findViewById(R.id.calendar);
         auth = FirebaseAuth.getInstance();
         reference = FirebaseDatabase.getInstance().getReference().child("Users");
+
         calendar = Calendar.getInstance();
-
-
         calendar.set(Calendar.MONTH, Calendar.NOVEMBER);
         calendar.set(Calendar.DAY_OF_MONTH, 9);
         calendar.set(Calendar.YEAR, 2012);
-
-
         calendar.add(Calendar.DAY_OF_MONTH, 1);
         calendar.add(Calendar.YEAR, 1);
-
-
 
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
@@ -67,7 +62,6 @@ public class Register extends AppCompatActivity {
                 day = i2;
                 month = i1+1;
                 year = i;
-
             }
         });
 

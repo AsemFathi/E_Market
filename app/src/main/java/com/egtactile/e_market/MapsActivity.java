@@ -88,14 +88,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
          binding = ActivityMapsBinding.inflate(getLayoutInflater());
          setContentView(binding.getRoot());
 
          ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.ACCESS_COARSE_LOCATION,
          Manifest.permission.ACCESS_FINE_LOCATION},PackageManager.PERMISSION_GRANTED);
 
-         //LocationRequest locationRequest = LocationRequest.create();
         addressText = (TextInputEditText) findViewById(R.id.addresstxt);
         countrynameText = (TextInputEditText) findViewById(R.id.countryname);
         user= FirebaseAuth.getInstance().getCurrentUser();
@@ -252,6 +250,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         //code
                         Toast.makeText(getApplicationContext(), "No address for this location", Toast.LENGTH_SHORT).show();
                         addressText.getText().clear();
+                        countrynameText.setText(addressList.get(0).getCountryName());
                     }
                 }catch(IOException ex){
                     //code
