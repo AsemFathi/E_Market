@@ -75,7 +75,7 @@ public class FeedbackAdapter extends RecyclerView.Adapter<FeedbackHolder> implem
 
     @Override
     public int getItemCount() {
-        return 0;
+        return feedbackList.size();
     }
 
     @Override

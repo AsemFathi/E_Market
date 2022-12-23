@@ -76,6 +76,7 @@ public class Register extends AppCompatActivity {
             public void onClick(View v) {
                 String name = Name.getText().toString();
                 String email = Email.getText().toString();
+                String mail = email.replaceAll("@gmail.com","");
                 String phone = Phone.getText().toString();
                 String password = Password.getText().toString();
                 auth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -84,7 +85,7 @@ public class Register extends AppCompatActivity {
                         if (task.isSuccessful())
                         {
                             firebaseUser= task.getResult().getUser();
-                            DatabaseReference newUser = reference.child(email);
+                            DatabaseReference newUser = reference.child(mail);
                            // String id = newUser.getKey();
                            // Log.i(TAG, "onComplete: ID " + id);
                             newUser.child("Full Name").setValue(name);

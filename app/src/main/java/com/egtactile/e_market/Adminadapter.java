@@ -52,8 +52,6 @@ public class Adminadapter extends RecyclerView.Adapter<Adminholder> implements R
     public Adminholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return  new Adminholder (LayoutInflater.from(context).inflate(R.layout.admin_recyclerview , parent , false) , recyclerViewInterface);
     }
-
-
     @Override
     public void onBindViewHolder(@NonNull Adminholder holder, int position) {
         //--------------------------------------
@@ -131,7 +129,7 @@ public class Adminadapter extends RecyclerView.Adapter<Adminholder> implements R
         String email = user.getEmail();
         email = email.replaceAll("@gmail.com" , "");
         DatabaseReference databaseReference2 = FirebaseDatabase
-                .getInstance().getReference().child("Cart").child(email);
+                .getInstance().getReference().child("Products");
 
        /* databaseReference1.addValueEventListener(new ValueEventListener() {
             @Override

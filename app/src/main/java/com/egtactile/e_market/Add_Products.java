@@ -36,7 +36,7 @@ public class Add_Products extends AppCompatActivity {
     EditText CatType;
     EditText CatName;
     EditText CatNum;
-    EditText CatPrice , Description;
+    EditText CatPrice ,Description, barcode;
     FirebaseAuth auth;
     FirebaseDatabase database;
     StorageReference reference;
@@ -58,7 +58,7 @@ public class Add_Products extends AppCompatActivity {
         CatType = findViewById(R.id.CatType);
         CatPrice = findViewById(R.id.CatPrice);
         Description = findViewById(R.id.description);
-
+        barcode = findViewById(R.id.barcodeproduct);
 
         auth = FirebaseAuth.getInstance();
         databaseReference = FirebaseDatabase.getInstance().getReference();
@@ -80,6 +80,7 @@ public class Add_Products extends AppCompatActivity {
             String price = CatPrice.getText().toString();
             String type = CatType.getText().toString();
             String description = Description.getText().toString();
+            String BarCode = barcode.getText().toString();
                /* reference.child(selectedImageUri.getPath()).putFile(selectedImageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
@@ -141,8 +142,7 @@ public class Add_Products extends AppCompatActivity {
             newData.child("Picture").setValue(path);
             newData.child("Name").setValue(Name);
             newData.child("Description").setValue(description);
-
-
+            newData.child("Barcode").setValue(BarCode);
             }
         });
 
@@ -156,12 +156,8 @@ public class Add_Products extends AppCompatActivity {
     }
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
         if (resultCode == RESULT_OK) {
-
-
             if (requestCode == 200) {
-
                 selectedImageUri = data.getData();
                 if (null != selectedImageUri) {
                     imageView.setImageURI(selectedImageUri);
@@ -169,7 +165,4 @@ public class Add_Products extends AppCompatActivity {
             }
         }
     }
-
-
-
 }

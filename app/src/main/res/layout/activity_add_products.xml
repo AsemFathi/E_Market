@@ -9,7 +9,7 @@
 
     <EditText
         android:id="@+id/CatType"
-        android:layout_width="wrap_content"
+        android:layout_width="389dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:ems="10"
@@ -22,7 +22,7 @@
 
     <EditText
         android:id="@+id/CatName"
-        android:layout_width="wrap_content"
+        android:layout_width="389dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="44dp"
         android:ems="10"
@@ -35,7 +35,7 @@
 
     <EditText
         android:id="@+id/description"
-        android:layout_width="wrap_content"
+        android:layout_width="393dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="44dp"
         android:ems="10"
@@ -48,7 +48,7 @@
 
     <EditText
         android:id="@+id/CatNum"
-        android:layout_width="wrap_content"
+        android:layout_width="389dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="44dp"
         android:ems="10"
@@ -61,7 +61,7 @@
 
     <EditText
         android:id="@+id/CatPrice"
-        android:layout_width="wrap_content"
+        android:layout_width="389dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="44dp"
         android:ems="10"
@@ -71,7 +71,18 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/CatNum" />
-
+    <EditText
+        android:id="@+id/barcodeproduct"
+        android:layout_width="389dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="44dp"
+        android:ems="10"
+        android:hint="Barcode (12 digit)"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/CatPrice" />
     <ImageView
         android:id="@+id/Choose_img"
         android:layout_width="94dp"

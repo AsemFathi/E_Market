@@ -278,7 +278,55 @@ public class HomeFragment extends Fragment implements RecyclerViewInterface{
     {
         if(result.getContents()!=null)
         {
-            searchText.setText(result.getContents());
+            searchInput = result.getContents();
+            Toast.makeText(getActivity(), searchInput, Toast.LENGTH_SHORT).show();
+            Map<String , List<String>> searchData = new HashMap<>();
+            List<String> searchList = new ArrayList<>();
+            List<items> searchItemsList = new ArrayList<items>();
+            DatabaseReference databaseReference1 = FirebaseDatabase
+                    .getInstance().getReference().child("Products");
+            databaseReference1.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    for(DataSnapshot datax: snapshot.getChildren())
+                    {
+                        String ProductName = datax.getKey();
+                        String ProductType = datax.child("Category").getValue().toString();
+                        String ProductBarcode = datax.child("Barcode").getValue().toString();
+                        Log.i(TAG, "onDataChange:"+ProductBarcode);
+                        Log.i(TAG, "onDataChange reading:"+searchInput);
+
+                        if (ProductBarcode.equals(searchInput)) {
+
+                            String ProPrice = datax.child("Price").getValue().toString();
+                            String ProNum = datax.child("Num").getValue().toString();
+                            String ProImageUrl = datax.child("Picture").getValue().toString();
+                            String des = datax.child("Description").getValue().toString();
+                            Log.i(TAG, "onDataChange: Description" + des);
+                            storageReference.child(ProImageUrl).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                @Override
+                                public void onSuccess(Uri uri) {
+                                    urldisplay = uri.toString();
+                                }
+                            });
+                            searchList.add(ProPrice);
+                            searchList.add(ProNum);
+                            searchList.add(des);
+                            searchList.add(ProImageUrl);
+                            searchList.add(ProductType);
+                            searchData.put(ProductName , searchList);
+                            searchItemsList.add(new items(ProPrice , ProductName , des , ProImageUrl , ProductType , ProNum));
+                            Log.i(TAG, "onDataChange: URL" + urldisplay);
+                        }
+                    }
+                    itemsList = searchItemsList;
+                    recyclerView.setAdapter(new MyAdapter(getActivity() ,searchItemsList ,HomeFragment.this));
+                }
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
 
         }
     });
@@ -299,8 +347,6 @@ public class HomeFragment extends Fragment implements RecyclerViewInterface{
         intent.putExtra("image" , itemsList.get(pos).getImage());
         startActivity(intent);
     }
-
-
 /*
     @Override
     protected void onStart() {
@@ -353,5 +399,4 @@ public class HomeFragment extends Fragment implements RecyclerViewInterface{
 
 
     }*/
-
 }
