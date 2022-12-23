@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId "com.egtactile.e_market"
-        minSdk 21
+        minSdk 24
         targetSdk 33
         versionCode 1
         versionName "1.0"
@@ -63,4 +63,5 @@ dependencies {
     implementation 'com.journeyapps:zxing-android-embedded:4.3.0'
     implementation 'com.karumi:dexter:6.2.3'
 
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 }

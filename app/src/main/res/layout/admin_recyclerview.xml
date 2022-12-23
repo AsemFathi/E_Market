@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@drawable/ic_launcher_background"
+        android:id="@+id/imageViewproductDetails"/>
+
+    <TextView
+        android:id="@+id/ItemNameproductDetails"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_toRightOf="@+id/imageViewproductDetails"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_toEndOf="@+id/imageViewproductDetails"
+        android:text="Name" />
+
+    <ImageView
+        android:id="@+id/deleteimg"
+        android:layout_width="56dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="219dp"
+        android:layout_marginTop="10dp"
+
+        android:src="@drawable/ic_baseline_remove_shopping_cart_24" />
+
+    <TextView
+        android:layout_width="100dp"
+        android:layout_height="30dp"
+        android:id="@+id/ItemPriceproductDetails"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_toEndOf="@+id/imageViewproductDetails"
+        android:layout_below="@+id/ItemNameproductDetails"
+        android:text="Price"
+
+        />
+
+    <TextView
+        android:id="@+id/ItemDescriptionproductDetails"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_below="@+id/ItemPriceproductDetails"
+
+
+        android:text="Description" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_below="@id/ItemDescriptionproductDetails"
+        android:text="-------------------------------------------------------------"
+        android:textSize="25dp"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="2dp">
+
+    </LinearLayout>
+</RelativeLayout>

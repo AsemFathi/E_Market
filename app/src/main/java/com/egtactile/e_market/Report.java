@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -26,12 +27,14 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.database.core.Repo;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 public class Report extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener,RecyclerViewInterface{
@@ -45,10 +48,10 @@ public class Report extends AppCompatActivity implements RadioGroup.OnCheckedCha
     private RecyclerView recyclerView;
     DatabaseReference databaseReference;
     FirebaseDatabase firebaseDatabase;
-    List<items> itemsList;
     List<String> users = new ArrayList<>();
-    List<String> info = new ArrayList<>();
+    List<items> products=new ArrayList<items>();
     StorageReference storageReference;
+    String urldisplay;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,10 +62,9 @@ public class Report extends AppCompatActivity implements RadioGroup.OnCheckedCha
         ChooseUser = (RadioGroup)findViewById(R.id.UserPreview);
         alltimecheck = (CheckBox) findViewById(R.id.alltimecheckBox);
         search = (Button) findViewById(R.id.confirmbtn);
-        String urldisplay;
         recyclerView = (RecyclerView) findViewById(R.id.orders_recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        //recyclerView.setAdapter(orderAdminAdapter);
+        storageReference = FirebaseStorage.getInstance().getReference();
 
         username.setEnabled(false);
         DateString.setEnabled(true);
@@ -87,6 +89,7 @@ public class Report extends AppCompatActivity implements RadioGroup.OnCheckedCha
         //choose (1) specific user / (2) all users
         ChooseUser.setOnCheckedChangeListener(this);
         ///////////////////////////////////////////////////
+
         //String getDate = DateString.getText().toString();
         //senario(1) --> specific date
         //subsenario<1> --> specific user
@@ -103,8 +106,9 @@ public class Report extends AppCompatActivity implements RadioGroup.OnCheckedCha
                 if(alldates){
                     //subsenario <2> --> all user
                     if(allusers){
-                        Toast.makeText(Report.this, "all users all dates", Toast.LENGTH_SHORT).show();
                         //get all sold data from firebase
+                        //1.get users
+                        users = new ArrayList<>();
                         DatabaseReference databaseReference1 = FirebaseDatabase
                                 .getInstance().getReference().child("Sold");
                         databaseReference1.addValueEventListener(new ValueEventListener() {
@@ -114,29 +118,65 @@ public class Report extends AppCompatActivity implements RadioGroup.OnCheckedCha
                                 {
                                     String userName = datax.getKey();
                                     users.add(userName);
-
+                                    //2.get products
                                 }
-                                recyclerView.setAdapter(new OrderAdapter(getApplicationContext() , users ,Report.this));
+                                recyclerView.setAdapter(new OrderAdapter(getApplicationContext() ,users,"no",Report.this));
                             }
-
                             @Override
                             public void onCancelled(@NonNull DatabaseError error) {
-
                             }
                         });
                     }
-                    else{}
+                    //subsenario <2> --> specific user
+                    else{
+                        String user = username.getText().toString().toLowerCase(Locale.ROOT);
+                        users = new ArrayList<>();
+                        DatabaseReference databaseReference1 = FirebaseDatabase
+                                .getInstance().getReference().child("Sold");
+                        databaseReference1.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                for(DataSnapshot datax: snapshot.getChildren())
+                                {
+                                    String userName = datax.getKey().toLowerCase(Locale.ROOT);
+                                    if(user.contains(userName)){
+                                        users.add(userName);
+                                    //2.get products
+                                    }
+                                }
+                                recyclerView.setAdapter(new OrderAdapter(getApplicationContext() ,users,"no" ,Report.this));
+                            }
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+                            }
+                        });
+                    }
                 }
-                else{}
+                //specific date
+                else{
+                    String date = DateString.getText().toString();
+                    users = new ArrayList<>();
+                    DatabaseReference databaseReference1 = FirebaseDatabase
+                            .getInstance().getReference().child("Sold");
+                    databaseReference1.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            for(DataSnapshot datax: snapshot.getChildren())
+                            {
+                                String userName = datax.getKey();
+                                users.add(userName);
+                                //2.get products
+                            }
+                            recyclerView.setAdapter(new OrderAdapter(getApplicationContext(),users,date,Report.this));
+                        }
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+                        }
+                    });
+                }
             }
         });
-
-
-
-
     }
-
-
 
     /*private void setupRecyclerView() {
         recyclerView = (RecyclerView) findViewById(R.id.orders_recycler);
@@ -157,7 +197,6 @@ public class Report extends AppCompatActivity implements RadioGroup.OnCheckedCha
                 break;
         }
     }
-
 
     @Override
     public void onItemClick(int pos) {

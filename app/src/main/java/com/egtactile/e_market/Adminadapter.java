@@ -2,9 +2,7 @@ package com.egtactile.e_market;
 
 import static android.content.ContentValues.TAG;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,13 +10,9 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.egtactile.e_market.ui.basket.BasketFragment;
-import com.egtactile.e_market.ui.home.HomeFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -28,22 +22,20 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
-import com.bumptech.glide.Glide;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
-public class ProductAdapter extends RecyclerView.Adapter<ProductHolder> implements RecyclerViewInterface {
+public class Adminadapter extends RecyclerView.Adapter<Adminholder> implements RecyclerViewInterface {
     Context context;
     Map<String , String> data;
     DatabaseReference databaseReference1;
     List<items> itemsList;
     int quantity;
     private final RecyclerViewInterface recyclerViewInterface;
-    public ProductAdapter(android.content.Context context, List<items> itemsList,
-            RecyclerViewInterface recyclerViewInterface ) {
+    public Adminadapter(android.content.Context context, List<items> itemsList,
+                          RecyclerViewInterface recyclerViewInterface ) {
         this.recyclerViewInterface = recyclerViewInterface;
         this.context = context;
         this.itemsList = itemsList;
@@ -57,12 +49,13 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductHolder> implemen
 
     @NonNull
     @Override
-    public ProductHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return  new ProductHolder (LayoutInflater.from(context).inflate(R.layout.product_cart_details , parent , false) , recyclerViewInterface) ;
+    public Adminholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        return  new Adminholder (LayoutInflater.from(context).inflate(R.layout.admin_recyclerview , parent , false) , recyclerViewInterface);
     }
 
+
     @Override
-    public void onBindViewHolder(@NonNull ProductHolder holder, int position) {
+    public void onBindViewHolder(@NonNull Adminholder holder, int position) {
         //--------------------------------------
         databaseReference1 = FirebaseDatabase
                 .getInstance().getReference().child("Products");
@@ -90,55 +83,9 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductHolder> implemen
         quantity = Integer.parseInt(itemsList.get(position).getNum());
         holder.Price.setText("Price: "+ itemsList.get(position).getPrice());
         holder.Description.setText("Description: " + itemsList.get(position).getDescription());
-        holder.Quantity.setText(itemsList.get(position).getNum());
         Picasso.get()
                 .load(itemsList.get(position).getImage())
                 .into(holder.imageView);
-        holder.imageViewAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int number = quantity;
-                if (Integer.parseInt(holder.Quantity.getText().toString()) > Integer.parseInt(holder.num))
-                {
-                    holder.Quantity.setText(holder.num);
-
-                }
-                else
-                {
-                    quantity++;
-                    holder.Quantity.setText(String.valueOf(quantity));
-                    number = Integer.parseInt(holder.num);
-                    number--;
-                }
-                itemsList.get(position).setNum(String.valueOf(quantity));
-                notifyItemChanged(position);
-
-                String num = String.valueOf(number);
-                FirebaseUpdate(position , num);
-
-            }
-        });
-        holder.imageViewRemove.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int number = quantity;
-                if(Integer.parseInt(holder.Quantity.getText().toString()) <= 0)
-                {
-                    holder.Quantity.setText("0");
-                }
-                else
-                {
-                    quantity--;
-                    holder.Quantity.setText(String.valueOf(quantity));
-                    number = Integer.parseInt(holder.num);
-                    number++;
-                }
-                notifyItemChanged(position);
-                itemsList.get(position).setNum(String.valueOf(quantity));
-                String num = String.valueOf(number);
-                FirebaseUpdate(position , num);
-            }
-        });
         holder.Delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -152,7 +99,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductHolder> implemen
         return itemsList.size();
     }
 
-    public void FirebaseUpdate (int pos , String num) {
+   /* public void FirebaseUpdate (int pos , String num) {
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String email = user.getEmail();
@@ -177,7 +124,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductHolder> implemen
             }
         });
 
-    }
+    }*/
 
     public void DeleteItem(String Name , String Num) {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();

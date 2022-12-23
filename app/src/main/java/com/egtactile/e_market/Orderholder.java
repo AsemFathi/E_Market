@@ -8,10 +8,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class Orderholder extends RecyclerView.ViewHolder{
     TextView showuser;
+    RecyclerView products_recycler;
+    productorder_adapter orderProdAdminAdapter;
 
     public Orderholder(@NonNull View itemView,RecyclerViewInterface recyclerViewInterface) {
         super(itemView);
         showuser = itemView.findViewById(R.id.show_username);
+        products_recycler = (RecyclerView) itemView.findViewById(R.id.products_order_recycler);
+
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
