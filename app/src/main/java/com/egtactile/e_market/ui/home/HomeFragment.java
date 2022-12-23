@@ -139,29 +139,30 @@ public class HomeFragment extends Fragment implements RecyclerViewInterface{
                 itemsList = new ArrayList<items>();
                 for (DataSnapshot datax : snapshot.getChildren()) {
                     String ProductName = datax.getKey();
-                    Log.i(TAG, "onDataChange: Name" + ProductName);
-                    String ProductType = datax.child("Category").getValue().toString();
-                    //String ProductName = datax.getKey();
-                    String ProPrice = datax.child("Price").getValue().toString();
-                    String ProNum = datax.child("Num").getValue().toString();
-                    String ProImageUrl = datax.child("Picture").getValue().toString();
-                    String des = datax.child("Description").getValue().toString();
-                    Log.i(TAG, "onDataChange: Description" + des);
-                    storageReference.child(ProImageUrl).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                        @Override
-                        public void onSuccess(Uri uri) {
-                            urldisplay = uri.toString();
-                        }
-                    });
-                    info.add(ProPrice.toLowerCase());
-                    info.add(ProNum.toLowerCase());
-                    info.add(des.toLowerCase());
-                    info.add(ProImageUrl.toLowerCase());
+                    if (!datax.child("Num").getValue().toString().equals("0")) {
+                        Log.i(TAG, "onDataChange: Name" + ProductName);
+                        String ProductType = datax.child("Category").getValue().toString();
+                        //String ProductName = datax.getKey();
+                        String ProPrice = datax.child("Price").getValue().toString();
+                        String ProNum = datax.child("Num").getValue().toString();
+                        String ProImageUrl = datax.child("Picture").getValue().toString();
+                        String des = datax.child("Description").getValue().toString();
+                        Log.i(TAG, "onDataChange: Description" + des);
+                        storageReference.child(ProImageUrl).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            @Override
+                            public void onSuccess(Uri uri) {
+                                urldisplay = uri.toString();
+                            }
+                        });
+                        info.add(ProPrice.toLowerCase());
+                        info.add(ProNum.toLowerCase());
+                        info.add(des.toLowerCase());
+                        info.add(ProImageUrl.toLowerCase());
 
-                    data.put(ProductName.toLowerCase(), info);
-                    itemsList.add(new items(ProPrice, ProductName, des, ProImageUrl, ProductType, ProNum));
-                    Log.i(TAG, "onDataChange: URL" + urldisplay);
-
+                        data.put(ProductName.toLowerCase(), info);
+                        itemsList.add(new items(ProPrice, ProductName, des, ProImageUrl, ProductType, ProNum));
+                        Log.i(TAG, "onDataChange: URL" + urldisplay);
+                    }
 
                 }
                 recyclerView.setAdapter(new MyAdapter(getActivity(), itemsList, HomeFragment.this));

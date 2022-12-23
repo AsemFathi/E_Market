@@ -6,92 +6,100 @@
     android:layout_height="match_parent"
     android:background="@drawable/background"
     tools:context=".Register">
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="5mm"
-            android:fontFamily="@font/wendy_one"
-            android:gravity="left"
-            android:text="Register"
-            android:textColor="#4A2784"
-            android:textSize="25sp" />
-
-        <EditText
-            android:id="@+id/editTextTextUsername"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:layout_marginTop="2dp"
-            android:hint="Username"
-            android:paddingLeft="10dp"
-             />
-        <EditText
-            android:id="@+id/editTextRegisterEmailAddress"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Enter your email"
-            android:inputType="textEmailAddress"
-            android:paddingLeft="10dp" />
-
-        <EditText
-            android:id="@+id/editTextRegisterPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:layout_marginTop="2dp"
-            android:hint="Password"
-            android:paddingLeft="10dp"
-            android:inputType="textPassword"/>
-
-        <EditText
-            android:id="@+id/editTextRegisterPhone"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:layout_marginTop="2dp"
-            android:hint="Phone"
-            android:paddingLeft="10dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Birthday"
-            android:textSize="24dp"
-            android:textStyle="bold" />
-
-
-        <CalendarView
-            android:id="@+id/calendar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:dateTextAppearance="@style/CalenderViewDateCustomText"
-            android:theme="@style/CalenderViewCustom"
-            android:weekDayTextAppearance="@style/CalenderViewWeekCustomText" />
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:orientation="horizontal"/>
-
-
-        <Button
-            android:id="@+id/ButtonRegister"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:backgroundTint="#4A2885"
-            android:text="@string/Register" />
-
+        android:layout_height="match_parent">
+   
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"/>
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-    </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5mm"
+                android:fontFamily="@font/wendy_one"
+                android:gravity="left"
+                android:text="Register"
+                android:textColor="#4A2784"
+                android:textSize="25sp" />
 
+
+
+            <EditText
+                android:id="@+id/editTextTextUsername"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:layout_marginTop="2dp"
+                android:hint="Username"
+                android:paddingLeft="10dp"
+                 />
+            <EditText
+                android:id="@+id/editTextRegisterEmailAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter your email"
+                android:inputType="textEmailAddress"
+                android:paddingLeft="10dp" />
+
+            <EditText
+                android:id="@+id/editTextRegisterPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:layout_marginTop="2dp"
+                android:hint="Password"
+                android:paddingLeft="10dp"
+                android:inputType="textPassword"/>
+
+            <EditText
+                android:id="@+id/editTextRegisterPhone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:layout_marginTop="2dp"
+                android:hint="Phone"
+                android:paddingLeft="10dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Birthday"
+                android:textSize="24dp"
+                android:textStyle="bold" />
+
+
+            <CalendarView
+                android:id="@+id/calendar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:dateTextAppearance="@style/CalenderViewDateCustomText"
+                android:theme="@style/CalenderViewCustom"
+                android:weekDayTextAppearance="@style/CalenderViewWeekCustomText" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:orientation="horizontal"/>
+
+
+            <Button
+                android:id="@+id/ButtonRegister"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:backgroundTint="#4A2885"
+                android:text="@string/Register" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"/>
+
+        </LinearLayout>
+
+    </ScrollView>
 </RelativeLayout>

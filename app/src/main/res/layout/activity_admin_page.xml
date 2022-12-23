@@ -9,20 +9,20 @@
 
     <Button
         android:id="@+id/add_btn"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/Add"
         android:textColor="@color/black" />
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/Delete"
+        android:text="Edit"
         android:id="@+id/delete_btn"
         android:textColor="@color/black"
         />
     <Button
         android:id="@+id/reportbtn"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Report"
         android:textColor="@color/black"
@@ -34,5 +34,12 @@
         android:layout_height="wrap_content"
         android:text="chart"
         android:textColor="@color/black" />
+    <Button
+        android:id="@+id/feedbackbtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Feedback"
+        android:textColor="@color/black" />
+
 
 </LinearLayout>

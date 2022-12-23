@@ -17,6 +17,7 @@ public class Admin_Page extends AppCompatActivity {
     Button Feedback;
     Button Report,delete;
     Button chart;
+
     FirebaseAuth auth;
     DatabaseReference reference;
     @Override
@@ -24,7 +25,7 @@ public class Admin_Page extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_page);
         Add = findViewById(R.id.add_btn);
-        Feedback = findViewById(R.id.delete_btn);
+        Feedback = findViewById(R.id.feedbackbtn);
         Report = findViewById(R.id.reportbtn);
         chart = findViewById(R.id.chartbtn);
         delete = findViewById(R.id.delete_btn);

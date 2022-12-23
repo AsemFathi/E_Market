@@ -16,6 +16,7 @@ public class FeedbackHolder extends RecyclerView.ViewHolder {
         Feedback = itemView.findViewById(R.id.Feedback);
         ratingBar = itemView.findViewById(R.id.RatingBar);
         Username = itemView.findViewById(R.id.FeedbackUserName);
+        ratingBar.setIsIndicator(true);
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

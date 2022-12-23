@@ -21,12 +21,16 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ProfileFragment extends Fragment {
 
     TextView name,mail,phone;
     DatabaseReference databaseReference;
     FirebaseUser userdata;
+    CircleImageView imageView;
     String email;
     private FragmentProfileBinding binding;
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -37,7 +41,7 @@ public class ProfileFragment extends Fragment {
         name= root.findViewById(R.id.nameview);
         mail= root.findViewById(R.id.mailview);
         phone = root.findViewById(R.id.phoneview);
-
+        imageView = root.findViewById(R.id.profile_image);
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Users");
         userdata = FirebaseAuth.getInstance().getCurrentUser();
 
@@ -54,6 +58,10 @@ public class ProfileFragment extends Fragment {
                             newUser.child("Email").setValue(email);
                             newUser.child("Phone").setValue(phone);
                         * */
+                        String image = indx.child("Image").getValue().toString();
+                        Picasso.get()
+                                .load(image)
+                                .into(imageView);
                         name.setText(indx.child("Full Name").getValue().toString());
                         mail.setText(indx.child("Email").getValue().toString());
                         phone.setText(indx.child("Phone").getValue().toString());
