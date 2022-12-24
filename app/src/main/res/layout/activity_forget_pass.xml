@@ -16,8 +16,8 @@
             android:id="@+id/textView2"
             android:layout_width="112dp"
             android:layout_height="79dp"
-            android:layout_marginTop="520dp"
             android:layout_marginLeft="6dp"
+            android:layout_marginTop="520dp"
             android:fontFamily="@font/caveat_brush"
             android:text="@string/forget_password"
             android:textColor="#4A1A53"
@@ -59,14 +59,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
         <Button
+            android:id="@+id/submit_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Sumbit"
-            android:id="@+id/submit_btn"
-            android:backgroundTint="#512759"
-            android:layout_marginTop="698dp"
             android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"/>
+            android:layout_marginTop="670dp"
+            android:layout_marginRight="5dp"
+            android:backgroundTint="#512759"
+            android:text="Sumbit" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,6 +10,8 @@
         android:id="@+id/imageViewproductDetails"/>
 
     <TextView
+        android:fontFamily="@font/calistoga"
+        android:textColor="#260251"
         android:id="@+id/ItemNameproductDetails"
         android:layout_width="wrap_content"
         android:layout_height="30dp"
@@ -33,6 +35,8 @@
     <TextView
         android:layout_width="100dp"
         android:layout_height="30dp"
+        android:fontFamily="@font/calistoga"
+        android:textColor="#260251"
         android:id="@+id/ItemPriceproductDetails"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
@@ -47,7 +51,8 @@
         android:id="@+id/ItemDescriptionproductDetails"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
+        android:fontFamily="@font/calistoga"
+        android:textColor="#260251"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
         android:layout_marginRight="10dp"

@@ -7,31 +7,33 @@
     android:background="@drawable/background"
     android:orientation="vertical"
     tools:context=".FeedbackActivity">
-<TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Please write your feedback"
-    android:layout_marginTop="10dp"
-    />
+
+    <TextView
+        android:layout_width="233dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="8dp"
+        android:fontFamily="@font/calistoga"
+        android:text="Please write your feedback"
+        android:textColor="#260251"
+        android:textSize="18dp" />
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Your feedback"
-        android:layout_marginTop="40dp"
-
+        android:layout_marginTop="20dp"
+        android:layout_margin="10dp"
         android:id="@+id/FeedbackEditText"
 
         />
 
     <RatingBar
         android:id="@+id/simpleRatingBar"
-
         android:layout_width="wrap_content"
         android:layout_height="60dp"
-
         android:layout_centerHorizontal="true"
+        android:layout_marginStart="80dp"
         android:layout_marginTop="60dp"
-        android:layout_marginStart="30dp"
         android:rating="2.5" />
 
     <Button
@@ -41,6 +43,8 @@
         android:text="Save"
         android:id="@+id/Save_btn"
         android:layout_marginTop="30dp"
+        android:layout_margin="30dp"
+        android:textAllCaps="false"
         android:layout_marginBottom="10dp"
         android:paddingBottom="10dp"
         />

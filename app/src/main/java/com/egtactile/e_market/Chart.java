@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -50,6 +51,9 @@ public class Chart extends AppCompatActivity {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                /***get the best seller product***/
+
+                //get the map to draw in(pie chart,bar chart)
                 for (DataSnapshot datax : snapshot.getChildren()) {
                     for (DataSnapshot orders : datax.getChildren()) {
                         String productName = orders.getKey();
@@ -63,6 +67,7 @@ public class Chart extends AppCompatActivity {
                         }
                     }
                 }
+                //filling up charts array data
                 for (Map.Entry<String,Integer> entry : products.entrySet()){
                     int value= entry.getValue();
                     BarEntry barEntry = new BarEntry(i, value);
@@ -71,19 +76,17 @@ public class Chart extends AppCompatActivity {
                     pieEntries.add(pieEntry);
                     i++;
                 }
-                //Bar chart
+
+                //_____________Bar chart_____________
+                //BarDataSet responsible for the outlook of the bar
                 BarDataSet barDataSet=new BarDataSet(barEntries,"Products");
                 barDataSet.setColors(ColorTemplate.COLORFUL_COLORS);
-                //hide draw values
-                barDataSet.setDrawValues(false);
+                //showing the value of the bar, default true if not set
+                barDataSet.setDrawValues(true);
                 //set bar data
                 barchart.setData(new BarData(barDataSet));
-
-                //set animation
+                //set y-axis animation
                 barchart.animateY(5000);
-                //set description
-                barchart.getDescription().setText("Products with best sellers");
-                barchart.getDescription().setTextColor(Color.BLACK);
                 //pie chart
                 PieDataSet pieDataSet=new PieDataSet(pieEntries,"Products");
                 pieDataSet.setColors(ColorTemplate.COLORFUL_COLORS);

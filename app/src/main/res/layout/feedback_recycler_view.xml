@@ -9,21 +9,28 @@
            android:layout_height="wrap_content"
            android:textSize="14dp"
            android:hint="Username"
+           android:fontFamily="@font/calistoga"
+           android:textColor="#260251"
+           android:layout_margin="7dp"
            android:layout_marginTop="5dp"
            android:id="@+id/FeedbackUserName"
 
            />
-       <TextView
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:textSize="34dp"
-           android:hint="Feedback"
-           android:layout_marginTop="30dp"
-           android:id="@+id/Feedback"
 
-           />
+    <TextView
+        android:id="@+id/Feedback"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="7dp"
+        android:fontFamily="@font/calistoga"
+        android:hint="Feedback"
+        android:textColor="#260251"
+        android:textSize="34dp"
 
-       <RatingBar
+        />
+
+    <RatingBar
            android:id="@+id/RatingBar"
 
            android:layout_width="wrap_content"

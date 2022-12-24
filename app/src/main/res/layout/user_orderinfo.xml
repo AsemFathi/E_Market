@@ -15,12 +15,10 @@
         app:cardCornerRadius="8dp"
         android:backgroundTint="@color/fui_transparent"
         app:cardElevation="0dp">
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/fui_transparent">
-
             <RelativeLayout
                 android:id="@+id/main_view_order"
                 android:layout_width="0dp"
@@ -31,7 +29,6 @@
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
-
                 <TextView
                     android:id="@+id/show_username"
                     android:layout_width="wrap_content"
@@ -40,8 +37,6 @@
                     android:textColor="@color/white"
                     android:text="username: MFGF56G2G5BFKS"
                     android:textSize="12sp" />
-
-
             </RelativeLayout>
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/expandableLayout_order"
@@ -63,7 +58,6 @@
                     android:paddingTop="5dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
-
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/products_order_recycler"
                         android:layout_width="match_parent"

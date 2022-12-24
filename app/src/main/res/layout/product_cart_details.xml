@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@drawable/background"
     android:layout_marginTop="2dp">
 
     <ImageView
@@ -14,12 +15,12 @@
         android:id="@+id/ItemNameCartDetails"
         android:layout_width="wrap_content"
         android:layout_height="30dp"
+        android:textColor="#260251"
         android:layout_toRightOf="@+id/imageViewCartDetails"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
         android:layout_marginRight="10dp"
         android:layout_toEndOf="@+id/imageViewCartDetails"
-
         android:text="Name" />
 
     <ImageView
@@ -38,6 +39,8 @@
         android:id="@+id/ItemPriceCartDetails"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
+        android:textColor="#260251"
+
         android:layout_marginTop="10dp"
         android:layout_toEndOf="@+id/imageViewCartDetails"
         android:layout_below="@+id/ItemNameCartDetails"
@@ -63,6 +66,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/ItemNameCartDetails"
         android:layout_marginStart="5dp"
+        android:textColor="#260251"
         android:layout_marginTop="10dp"
         android:layout_toEndOf="@+id/im_reduce"
         android:text="1"
@@ -85,7 +89,7 @@
         android:id="@+id/ItemDescriptionCartDetails"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
+        android:textColor="#260251"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
         android:layout_marginRight="10dp"
@@ -99,7 +103,7 @@
         android:layout_below="@id/ItemDescriptionCartDetails"
         android:text="-------------------------------------------------------------"
         android:textSize="25dp"
-
+        android:textColor="#260251"
         />
 
     <LinearLayout

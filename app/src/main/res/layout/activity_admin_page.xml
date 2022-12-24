@@ -5,41 +5,82 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Admin_Page"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/background">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="229dp"
+        android:src="@drawable/ic_baseline_admin_panel_settings_24" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="76dp"
+        android:layout_margin="5dp"
+        android:fontFamily="@font/carter_one"
+        android:text="Emarket Admin Panel"
+        android:textAlignment="center"
+        android:textColor="#260251"
+        android:textSize="20dp" />
     <Button
         android:id="@+id/add_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/Add"
-        android:textColor="@color/black" />
+        android:layout_margin="5dp"
+        android:backgroundTint="#7F1E98"
+        android:textSize="17dp"
+        android:fontFamily="@font/calistoga"
+        android:text="Add products"
+        android:textAllCaps="false"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/white" />
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Edit"
+        android:text="Edit products"
+        android:textAllCaps="false"
+        android:backgroundTint="#7F1E98"
         android:id="@+id/delete_btn"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
+        android:layout_margin="5dp"
+        android:textSize="17dp"
+        android:fontFamily="@font/calistoga"
         />
     <Button
         android:id="@+id/reportbtn"
         android:layout_width="match_parent"
+        android:backgroundTint="#7F1E98"
         android:layout_height="wrap_content"
         android:text="Report"
-        android:textColor="@color/black"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:layout_margin="5dp"
+        android:textSize="17dp"
+        android:fontFamily="@font/calistoga"
         />
 
     <Button
         android:id="@+id/chartbtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="chart"
-        android:textColor="@color/black" />
+        android:backgroundTint="#7F1E98"
+        android:textAllCaps="false"
+        android:text="Sellers chart"
+        android:layout_margin="5dp"
+        android:textColor="@color/white"
+        android:textSize="17dp"
+        android:fontFamily="@font/calistoga"/>
     <Button
         android:id="@+id/feedbackbtn"
+        android:backgroundTint="#7F1E98"
+        android:textAllCaps="false"
+        android:textSize="17dp"
+        android:fontFamily="@font/calistoga"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Feedback"
-        android:textColor="@color/black" />
+        android:text="Users feedback"
+        android:layout_margin="5dp"
+        android:textColor="@color/white"/>
 
 
 </LinearLayout>

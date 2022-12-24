@@ -49,21 +49,26 @@
 
             <CheckBox
                 android:id="@+id/remember"
-                android:layout_width="wrap_content"
+                android:layout_width="151dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:buttonTint="#490455"
-                android:fontFamily="@font/wendy_one"
+                android:fontFamily="@font/carter_one"
                 android:text="Remember Me"
                 android:textColor="#490455"
-                android:textSize="14dp" />
+                android:textSize="13dp" />
 
             <Button
                 android:id="@+id/forget_password"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="15mm"
-                android:text="Forget your password?" />
+                android:layout_marginLeft="39dp"
+                android:fontFamily="@font/carter_one"
+                android:background="@color/fui_transparent"
+                android:text="Forget your password?"
+                android:textAllCaps="false"
+                android:textColor="#490455"
+                android:textSize="10dp" />
 
         </LinearLayout>
 
@@ -73,6 +78,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
+            android:textAllCaps="false"
             android:backgroundTint="#4A2885"
             android:text="Login" />
 
@@ -96,19 +102,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:text="Sign Up"
-                android:textColor="#4B2885"
+                android:textAllCaps="false"
+                android:textColor="#FFFFFF"
                 android:textStyle="bold" />
         </LinearLayout>
-
-        <TextView
-            android:id="@+id/OR"
-            android:layout_width="wrap_content"
-            android:layout_height="191dp"
-            android:layout_marginLeft="100dp"
-            android:layout_marginTop="2dp"
-            android:text="____________ OR ____________"
-            android:textColor="#BBA5E3"
-            android:textStyle="bold" />
 
     </LinearLayout>
 

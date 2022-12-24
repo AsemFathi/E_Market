@@ -16,165 +16,186 @@
         android:src="@drawable/ic_menu_gallery"
         android:layout_height="200dp"
         />
-
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:orientation="horizontal"
-        android:layout_height="wrap_content">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <TextView
+        <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="29dp"
-            android:layout_marginLeft="10dp"
-            android:text="Name : "
-            android:textSize="30dp" />
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
 
-        <EditText
-            android:id="@+id/ProductName"
-            android:layout_width="121dp"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/calistoga"
+                android:textColor="#260251"
+                android:layout_marginLeft="10dp"
+                android:text="Name : "
+                android:textSize="20dp" />
+
+            <EditText
+                android:id="@+id/ProductName"
+                android:layout_width="273dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:hint="Price"
+                android:textSize="20dp"
+
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/calistoga"
+                android:textColor="#260251"
+                android:layout_marginLeft="10dp"
+                android:text="Type : "
+                android:textSize="20dp"
+                />
+
+            <EditText
+                android:id="@+id/ProductType"
+                android:layout_width="282dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:hint="Type"
+                android:textSize="20dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/calistoga"
+                android:textColor="#260251"
+                android:layout_marginLeft="10dp"
+                android:text="Price : "
+                android:textSize="20dp"/>
+
+            <EditText
+                android:id="@+id/ProductPrice"
+                android:layout_width="283dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:hint="Price"
+                android:textSize="20dp"
+
+                />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/calistoga"
+                android:textColor="#260251"
+                android:layout_marginLeft="10dp"
+                android:text="Available in stock : "
+                android:textSize="20dp"/>
+
+            <EditText
+                android:id="@+id/ProductNum"
+                android:layout_width="169dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:hint="Avail"
+                android:textSize="20dp"
+
+                />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/calistoga"
+                android:textColor="#260251"
+                android:layout_marginLeft="10dp"
+                android:text="Description : "
+                android:textSize="20dp"/>
+
+            <EditText
+                android:id="@+id/ProductDescription"
+                android:layout_width="223dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:hint="Description"
+                android:textSize="20dp"
+
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="303dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:hint="Price"
-            android:textSize="30dp"
+            android:layout_marginTop="30dp">
+            <ImageView
+                android:id="@+id/reduce"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="150dp"
+                android:paddingEnd="5dp"
+                android:src="@drawable/ic_baseline_remove_24" />
 
-            />
+            <TextView
+                android:id="@+id/tv_num"
+                android:layout_width="47dp"
+                android:layout_height="40dp"
+                android:text="0"
+                android:textColor="#260251"
+                android:textSize="30dp"
+                android:textAlignment="center"
+                android:textStyle="bold" />
 
-    </LinearLayout>
+            <ImageView
+                android:id="@+id/im_add"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="15dp"
+                android:paddingEnd="5dp"
+                android:src="@drawable/ic_baseline_add_24" />
+        </LinearLayout>
 
-<LinearLayout
-        android:layout_width="wrap_content"
-        android:orientation="horizontal"
-        android:layout_height="wrap_content">
-
-        <TextView
+        <Button
+            android:id="@+id/AddToCart"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:text="Type : "
-            android:textSize="30dp"/>
-
-    <EditText
-        android:id="@+id/ProductType"
-        android:layout_width="147dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:hint="Type"
-        android:textSize="30dp"
-
-        />
-
+            android:layout_marginStart="150dp"
+            android:layout_marginTop="25dp"
+            android:text="Add to Cart"
+            android:backgroundTint="#550D68"
+            android:textAllCaps="false"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold" />
     </LinearLayout>
+</ScrollView>
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:orientation="horizontal"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:text="Price : "
-            android:textSize="30dp"/>
-
-        <EditText
-            android:id="@+id/ProductPrice"
-            android:layout_width="137dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:hint="Price"
-            android:textSize="30dp"
-
-            />
-
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:orientation="horizontal"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:text="Available in stock : "
-            android:textSize="30dp"/>
-
-        <EditText
-            android:id="@+id/ProductNum"
-            android:layout_width="102dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:hint="Avail"
-            android:textSize="30dp"
-
-            />
-
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:orientation="horizontal"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:text="Description : "
-            android:textSize="30dp"/>
-
-        <EditText
-            android:id="@+id/ProductDescription"
-            android:layout_width="190dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:hint="Description"
-            android:textSize="30dp"
-
-            />
-
-    </LinearLayout>
-   <LinearLayout
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
-       android:layout_marginTop="30dp"
-       >
-
-       <ImageView
-           android:layout_marginLeft="100dp"
-
-           android:id="@+id/reduce"
-           android:src="@drawable/ic_baseline_remove_24"
-           android:layout_width="40dp"
-           android:layout_height="40dp"
-           android:paddingEnd="5dp"/>
-       <TextView
-           android:id="@+id/tv_num"
-           android:layout_width="40dp"
-           android:layout_height="40dp"
-           android:textSize="30dp"
-           android:text="0"
-           android:textStyle="bold"
-           />
-       <ImageView
-           android:layout_marginStart="15dp"
-           android:id="@+id/im_add"
-           android:src="@drawable/ic_baseline_add_24"
-           android:layout_width="40dp"
-           android:layout_height="40dp"
-           android:paddingEnd="5dp"/>
-   </LinearLayout>
-
-    <Button
-        android:id="@+id/AddToCart"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="25dp"
-        android:text="Add to Cart"
-        android:textAlignment="center"
-        android:textColor="#4B2885"
-        android:textStyle="bold" />
 
 </LinearLayout>

@@ -10,6 +10,8 @@
         android:id="@+id/imageViewCart"/>
 
     <TextView
+        android:fontFamily="@font/calistoga"
+        android:textColor="#260251"
         android:id="@+id/ItemNameCart"
         android:layout_width="match_parent"
         android:layout_height="30dp"
@@ -26,6 +28,8 @@
         android:layout_height="30dp"
         android:id="@+id/ItemPriceCart"
         android:layout_marginLeft="10dp"
+        android:fontFamily="@font/calistoga"
+        android:textColor="#260251"
         android:layout_marginRight="10dp"
         android:layout_marginTop="10dp"
         android:layout_toEndOf="@+id/imageViewCart"
@@ -38,6 +42,8 @@
         android:layout_height="30dp"
         android:id="@+id/ItemQuantityCart"
         android:layout_marginLeft="60dp"
+        android:fontFamily="@font/calistoga"
+        android:textColor="#260251"
         android:layout_marginRight="10dp"
         android:layout_marginTop="10dp"
         android:layout_toEndOf="@+id/ItemPriceCart"
